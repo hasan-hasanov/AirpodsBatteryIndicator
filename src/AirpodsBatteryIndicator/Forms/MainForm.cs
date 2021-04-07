@@ -10,6 +10,10 @@ namespace AirpodsBatteryIndicator
             InitializeComponent();
         }
 
-        public string BatteryIndicator { get; set; }
+        public string LeftBudBatteryPercentage { get => labelLeftBud.Text; set => labelLeftBud.Text = value; }
+
+        public string RightBudBatteryPercentage { get => labelRightBud.Text; set => labelRightBud.Text = value; }
+
+        public string CaseBatteryPercentage { get => labelCase.Text; set => labelCase.Text = value; }
     }
 }

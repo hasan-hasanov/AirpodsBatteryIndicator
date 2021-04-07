@@ -6,6 +6,10 @@ namespace ABI.Services.Views
     {
         event EventHandler Load;
 
-        string BatteryIndicator { get; set; }
+        string LeftBudBatteryPercentage { get; set; }
+
+        string RightBudBatteryPercentage { get; set; }
+
+        string CaseBatteryPercentage { get; set; }
     }
 }

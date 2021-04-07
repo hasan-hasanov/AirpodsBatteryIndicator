@@ -24,8 +24,11 @@ namespace ABI.Services.Presenters
 
         private async void MainFormViewOnLoad(object sender, EventArgs eventArgs)
         {
-            var status = await _getAirpodsBatteryStatusQueryHandler.HandleAsync(new GetAirpodsBatteryStatusQuery());
-            _view.BatteryIndicator = $"{status.LeftEarbud}";
+            BatteryIndicator airpods = await _getAirpodsBatteryStatusQueryHandler.HandleAsync(new GetAirpodsBatteryStatusQuery());
+
+            _view.LeftBudBatteryPercentage = airpods.LeftEarbud < 0 ? "Not connected" : $"{airpods.LeftEarbud} %";
+            _view.RightBudBatteryPercentage = airpods.RightEarbud < 0 ? "Not connected" : $"{airpods.RightEarbud} %";
+            _view.CaseBatteryPercentage = airpods.Case < 0 ? "Not connected" : $"{airpods.Case} %";
         }
     }
 }
