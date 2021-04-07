@@ -30,23 +30,16 @@ namespace AirpodsBatteryIndicator
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.lblStatus = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.labelRightBud = new System.Windows.Forms.Button();
+            this.labelCase = new System.Windows.Forms.Button();
+            this.labelLeftBud = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(37, 235);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(38, 15);
-            this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "label1";
             // 
             // pictureBox1
             // 
@@ -78,16 +71,66 @@ namespace AirpodsBatteryIndicator
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
             // 
+            // labelRightBud
+            // 
+            this.labelRightBud.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelRightBud.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.labelRightBud.FlatAppearance.BorderSize = 0;
+            this.labelRightBud.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.labelRightBud.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.labelRightBud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelRightBud.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelRightBud.Location = new System.Drawing.Point(118, 233);
+            this.labelRightBud.Name = "labelRightBud";
+            this.labelRightBud.Size = new System.Drawing.Size(100, 29);
+            this.labelRightBud.TabIndex = 4;
+            this.labelRightBud.Text = "100";
+            this.labelRightBud.UseVisualStyleBackColor = true;
+            // 
+            // labelCase
+            // 
+            this.labelCase.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelCase.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.labelCase.FlatAppearance.BorderSize = 0;
+            this.labelCase.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.labelCase.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.labelCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelCase.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelCase.Location = new System.Drawing.Point(248, 233);
+            this.labelCase.Name = "labelCase";
+            this.labelCase.Size = new System.Drawing.Size(190, 29);
+            this.labelCase.TabIndex = 5;
+            this.labelCase.Text = "100";
+            this.labelCase.UseVisualStyleBackColor = true;
+            // 
+            // labelLeftBud
+            // 
+            this.labelLeftBud.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelLeftBud.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.labelLeftBud.FlatAppearance.BorderSize = 0;
+            this.labelLeftBud.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.labelLeftBud.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.labelLeftBud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelLeftBud.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelLeftBud.Location = new System.Drawing.Point(12, 233);
+            this.labelLeftBud.Name = "labelLeftBud";
+            this.labelLeftBud.Size = new System.Drawing.Size(100, 29);
+            this.labelLeftBud.TabIndex = 6;
+            this.labelLeftBud.Text = "100";
+            this.labelLeftBud.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(450, 270);
+            this.ClientSize = new System.Drawing.Size(450, 274);
+            this.Controls.Add(this.labelLeftBud);
+            this.Controls.Add(this.labelCase);
+            this.Controls.Add(this.labelRightBud);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.lblStatus);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -97,16 +140,17 @@ namespace AirpodsBatteryIndicator
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Button labelRightBud;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button labelLeftBud;
+        private System.Windows.Forms.Button labelCase;
     }
 }
 
