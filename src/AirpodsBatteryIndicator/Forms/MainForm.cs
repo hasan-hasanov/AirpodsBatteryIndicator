@@ -1,6 +1,7 @@
 ﻿using ABI.Adapter.NamedPipe.Queries.GetAirpodsBatteryStatus;
 using ABI.Core.Entities;
 using ABI.Core.Queries;
+using AirpodsBatteryIndicator.Properties;
 using System;
 using System.Drawing;
 using System.Text;
@@ -55,6 +56,21 @@ namespace AirpodsBatteryIndicator
             }
         }
 
+        private void TrayControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (WindowState == FormWindowState.Minimized)
+                {
+                    ShowWindow();
+                }
+                else
+                {
+                    HideWindow();
+                }
+            }
+        }
+
         private async Task FetchAirpodsBatteryStatus()
         {
             try
@@ -72,6 +88,8 @@ namespace AirpodsBatteryIndicator
                 labelLeftBud.Text = airpods.LeftEarbud < 0 ? "Not connected" : $"{airpods.LeftEarbud} %";
                 labelRightBud.Text = airpods.RightEarbud < 0 ? "Not connected" : $"{airpods.RightEarbud} %";
                 labelCase.Text = airpods.Case < 0 ? "Not connected" : $"{airpods.Case} %";
+
+                SetTryIconRegardingBattery(airpods);
             }
             catch (Exception ex)
             {
@@ -81,18 +99,49 @@ namespace AirpodsBatteryIndicator
             }
         }
 
-        private void TrayControl_MouseClick(object sender, MouseEventArgs e)
+        private void SetTryIconRegardingBattery(BatteryIndicator airpods)
         {
-            if (e.Button == MouseButtons.Left)
+            if (airpods.Status == 1)
             {
-                if (WindowState == FormWindowState.Minimized)
+                int minPercentage = airpods.Case;
+                if (airpods.LeftEarbud > 0)
                 {
-                    ShowWindow();
+                    minPercentage = airpods.LeftEarbud;
+                }
+                if (airpods.RightEarbud > 0)
+                {
+                    minPercentage = airpods.RightEarbud;
+                }
+
+                if (airpods.RightEarbud > 0 && airpods.RightEarbud < airpods.LeftEarbud)
+                {
+                    minPercentage = airpods.RightEarbud;
+                }
+
+                if (minPercentage > 75)
+                {
+                    trayControl.Icon = Resources._100_white;
+                }
+                else if (minPercentage > 50)
+                {
+                    trayControl.Icon = Resources._75_white;
+                }
+                else if (minPercentage > 30)
+                {
+                    trayControl.Icon = Resources._50_white;
+                }
+                else if (minPercentage > 15)
+                {
+                    trayControl.Icon = Resources._30_white;
                 }
                 else
                 {
-                    HideWindow();
+                    trayControl.Icon = Resources._15_white;
                 }
+            }
+            else
+            {
+                trayControl.Icon = Resources.CaseWhiteBackground;
             }
         }
 
