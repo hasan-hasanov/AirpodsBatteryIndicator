@@ -30,6 +30,13 @@ namespace AirpodsBatteryIndicator
             }
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.WindowState = FormWindowState.Minimized;
+            Hide();
+        }
+
         private async Task FetchAirpodsBatteryStatus()
         {
             try

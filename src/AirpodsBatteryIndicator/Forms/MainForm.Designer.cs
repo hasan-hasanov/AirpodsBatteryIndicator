@@ -151,6 +151,7 @@ namespace AirpodsBatteryIndicator
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "Airpods Battery Status";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
