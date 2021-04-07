@@ -41,6 +41,13 @@ namespace AirpodsBatteryIndicator
 
         private void AirpodsBatteryCheckTimer_Tick(object sender, EventArgs e)
         {
+            if (_airpodsTimerOperation == null)
+            {
+                SimulateAnimation(labelLeftBud);
+                SimulateAnimation(labelCase);
+                SimulateAnimation(labelRightBud);
+            }
+
             if (_airpodsTimerOperation == null || _airpodsTimerOperation.IsCompleted)
             {
                 _airpodsTimerOperation = FetchAirpodsBatteryStatus();
@@ -80,14 +87,14 @@ namespace AirpodsBatteryIndicator
 
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(airpods.LeftEarbud < 0 ? "Left: N/A" : $"Left: {airpods.LeftEarbud} %")
-                    .AppendLine(airpods.RightEarbud < 0 ? "Right: N/A" : $"Right: {airpods.RightEarbud} %")
-                    .AppendLine(airpods.Case < 0 ? "Case: N/A" : $"Case: {airpods.Case} %");
+                    .AppendLine(airpods.Case < 0 ? "Case: N/A" : $"Case: {airpods.Case} %")
+                    .AppendLine(airpods.RightEarbud < 0 ? "Right: N/A" : $"Right: {airpods.RightEarbud} %");
 
                 trayControl.Text = sb.ToString();
 
-                labelLeftBud.Text = airpods.LeftEarbud < 0 ? "Not connected" : $"{airpods.LeftEarbud} %";
-                labelRightBud.Text = airpods.RightEarbud < 0 ? "Not connected" : $"{airpods.RightEarbud} %";
-                labelCase.Text = airpods.Case < 0 ? "Not connected" : $"{airpods.Case} %";
+                labelLeftBud.Text = airpods.LeftEarbud < 0 ? "N/A" : $"{airpods.LeftEarbud} %";
+                labelCase.Text = airpods.Case < 0 ? "N/A" : $"{airpods.Case} %";
+                labelRightBud.Text = airpods.RightEarbud < 0 ? "N/A" : $"{airpods.RightEarbud} %";
 
                 SetTryIconRegardingBattery(airpods);
             }
@@ -142,6 +149,15 @@ namespace AirpodsBatteryIndicator
             else
             {
                 trayControl.Icon = Resources.CaseWhiteBackground;
+            }
+        }
+
+        private void SimulateAnimation(Button button)
+        {
+            button.Text = button.Text += ".";
+            if (button.Text.Length >= 3)
+            {
+                button.Text = ".";
             }
         }
 

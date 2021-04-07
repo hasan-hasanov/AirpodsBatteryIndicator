@@ -57,7 +57,7 @@ namespace AirpodsBatteryIndicator
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(128, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(338, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(110, 208);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -67,9 +67,9 @@ namespace AirpodsBatteryIndicator
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(261, 12);
+            this.pictureBox3.Location = new System.Drawing.Point(128, 12);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(190, 208);
+            this.pictureBox3.Size = new System.Drawing.Size(204, 208);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
@@ -82,12 +82,13 @@ namespace AirpodsBatteryIndicator
             this.labelRightBud.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.labelRightBud.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelRightBud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRightBud.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelRightBud.Location = new System.Drawing.Point(124, 233);
+            this.labelRightBud.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelRightBud.Location = new System.Drawing.Point(338, 226);
             this.labelRightBud.Name = "labelRightBud";
-            this.labelRightBud.Size = new System.Drawing.Size(110, 29);
+            this.labelRightBud.Size = new System.Drawing.Size(110, 36);
             this.labelRightBud.TabIndex = 4;
-            this.labelRightBud.Text = "Connecting...";
+            this.labelRightBud.Text = ".";
+            this.labelRightBud.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.labelRightBud.UseVisualStyleBackColor = true;
             // 
             // labelCase
@@ -98,12 +99,12 @@ namespace AirpodsBatteryIndicator
             this.labelCase.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.labelCase.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelCase.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelCase.Location = new System.Drawing.Point(261, 233);
+            this.labelCase.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelCase.Location = new System.Drawing.Point(128, 226);
             this.labelCase.Name = "labelCase";
-            this.labelCase.Size = new System.Drawing.Size(187, 29);
+            this.labelCase.Size = new System.Drawing.Size(204, 36);
             this.labelCase.TabIndex = 5;
-            this.labelCase.Text = "Connecting...";
+            this.labelCase.Text = ".";
             this.labelCase.UseVisualStyleBackColor = true;
             // 
             // labelLeftBud
@@ -114,18 +115,19 @@ namespace AirpodsBatteryIndicator
             this.labelLeftBud.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.labelLeftBud.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelLeftBud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLeftBud.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelLeftBud.Location = new System.Drawing.Point(8, 233);
+            this.labelLeftBud.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelLeftBud.Location = new System.Drawing.Point(12, 226);
             this.labelLeftBud.Name = "labelLeftBud";
-            this.labelLeftBud.Size = new System.Drawing.Size(110, 29);
+            this.labelLeftBud.Size = new System.Drawing.Size(110, 36);
             this.labelLeftBud.TabIndex = 6;
-            this.labelLeftBud.Text = "Connecting...";
+            this.labelLeftBud.Text = ".";
+            this.labelLeftBud.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelLeftBud.UseVisualStyleBackColor = true;
             // 
             // airpodsBatteryCheckTimer
             // 
             this.airpodsBatteryCheckTimer.Enabled = true;
-            this.airpodsBatteryCheckTimer.Interval = 10;
+            this.airpodsBatteryCheckTimer.Interval = 500;
             this.airpodsBatteryCheckTimer.Tick += new System.EventHandler(this.AirpodsBatteryCheckTimer_Tick);
             // 
             // trayControl
