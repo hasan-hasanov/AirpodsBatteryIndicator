@@ -239,7 +239,7 @@
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAPEAAAICCAYAAAAeUiuXAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACg3SURBVHhe7Z0H
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACg3SURBVHhe7Z0H
         uHVXVa5pEgjNAAooCoRe5QIJLUiRckGKl4gQNKgIGESEq4igqEQMRYogoBQFQaqgGKoICLlwKaFEQEpA
         mpAeEhFCAA36fSaH/P/5v3P2mGONtfdca33v87xPIDl77XPWGt/eq8w55gWMMcYM5wrwIHgofCQ8Cj4P
         vha+E34Mfg5+GZ5xnt+F/3WeXz/v39FT4WfgsfCt8NWQ2zoSPhjeDd4AHgCNMQ3sD28KD4dPhq+Hn4Zn
@@ -417,7 +417,7 @@
   <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAZYAAAHCCAYAAADM5+93AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACcSSURBVHhe7d0J
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAACcSSURBVHhe7d0J
         kC5VmebxYt9klcUGEQUVgZERxRURtTFaVGwBWUXRRhFHOmgBxZVFcQRxaQw37GlHEURpQZFh7NZ2A1pt
         QEFAVJRdZJFVWZRGZp4HuFhc3lu3qs57Mk9++f9F/COI5N5avpuZp+rLzHOmAABAm5ZXT1IvVvuqI9Sx
         6mT1PXWhulTdpG5Wv1f/j4iqdZvyseZjzseej0Efiz4mfWz6GPWx6mN2Y+VjGOjFMuop6tXqg+rf1G9U
@@ -587,13 +587,4 @@
         sXad8rHnY9DHoo9JH5s+Rt+gfMz62GVFRgAA2jM19f8BeEYQY6qQjy8AAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="labelRightBud.Locked" type="System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-    <value>True</value>
-  </metadata>
-  <metadata name="labelCase.Locked" type="System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-    <value>True</value>
-  </metadata>
-  <metadata name="labelLeftBud.Locked" type="System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-    <value>True</value>
-  </metadata>
 </root>

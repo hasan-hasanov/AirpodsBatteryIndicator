@@ -46,7 +46,7 @@ namespace AirpodsBatteryIndicator
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 208);
+            this.pictureBox1.Size = new System.Drawing.Size(110, 208);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -54,9 +54,9 @@ namespace AirpodsBatteryIndicator
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(118, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(128, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 208);
+            this.pictureBox2.Size = new System.Drawing.Size(110, 208);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
@@ -64,7 +64,7 @@ namespace AirpodsBatteryIndicator
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(248, 12);
+            this.pictureBox3.Location = new System.Drawing.Point(261, 12);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(190, 208);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -80,9 +80,9 @@ namespace AirpodsBatteryIndicator
             this.labelRightBud.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelRightBud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelRightBud.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelRightBud.Location = new System.Drawing.Point(118, 233);
+            this.labelRightBud.Location = new System.Drawing.Point(124, 233);
             this.labelRightBud.Name = "labelRightBud";
-            this.labelRightBud.Size = new System.Drawing.Size(100, 29);
+            this.labelRightBud.Size = new System.Drawing.Size(110, 29);
             this.labelRightBud.TabIndex = 4;
             this.labelRightBud.Text = "Connecting...";
             this.labelRightBud.UseVisualStyleBackColor = true;
@@ -96,9 +96,9 @@ namespace AirpodsBatteryIndicator
             this.labelCase.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelCase.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelCase.Location = new System.Drawing.Point(248, 233);
+            this.labelCase.Location = new System.Drawing.Point(261, 233);
             this.labelCase.Name = "labelCase";
-            this.labelCase.Size = new System.Drawing.Size(190, 29);
+            this.labelCase.Size = new System.Drawing.Size(187, 29);
             this.labelCase.TabIndex = 5;
             this.labelCase.Text = "Connecting...";
             this.labelCase.UseVisualStyleBackColor = true;
@@ -112,9 +112,9 @@ namespace AirpodsBatteryIndicator
             this.labelLeftBud.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelLeftBud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelLeftBud.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelLeftBud.Location = new System.Drawing.Point(12, 233);
+            this.labelLeftBud.Location = new System.Drawing.Point(8, 233);
             this.labelLeftBud.Name = "labelLeftBud";
-            this.labelLeftBud.Size = new System.Drawing.Size(100, 29);
+            this.labelLeftBud.Size = new System.Drawing.Size(110, 29);
             this.labelLeftBud.TabIndex = 6;
             this.labelLeftBud.Text = "Connecting...";
             this.labelLeftBud.UseVisualStyleBackColor = true;
@@ -124,7 +124,7 @@ namespace AirpodsBatteryIndicator
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(450, 274);
+            this.ClientSize = new System.Drawing.Size(463, 274);
             this.Controls.Add(this.labelLeftBud);
             this.Controls.Add(this.labelCase);
             this.Controls.Add(this.labelRightBud);
