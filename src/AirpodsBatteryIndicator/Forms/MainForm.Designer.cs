@@ -38,6 +38,7 @@ namespace AirpodsBatteryIndicator
             this.labelCase = new System.Windows.Forms.Button();
             this.labelLeftBud = new System.Windows.Forms.Button();
             this.airpodsBatteryCheckTimer = new System.Windows.Forms.Timer(this.components);
+            this.trayControl = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -127,6 +128,12 @@ namespace AirpodsBatteryIndicator
             this.airpodsBatteryCheckTimer.Interval = 10;
             this.airpodsBatteryCheckTimer.Tick += new System.EventHandler(this.AirpodsBatteryCheckTimer_Tick);
             // 
+            // trayControl
+            // 
+            this.trayControl.Icon = ((System.Drawing.Icon)(resources.GetObject("trayControl.Icon")));
+            this.trayControl.Text = "Connecting...";
+            this.trayControl.Visible = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -160,6 +167,7 @@ namespace AirpodsBatteryIndicator
         private System.Windows.Forms.Button labelLeftBud;
         private System.Windows.Forms.Button labelCase;
         private System.Windows.Forms.Timer airpodsBatteryCheckTimer;
+        private System.Windows.Forms.NotifyIcon trayControl;
     }
 }
 
