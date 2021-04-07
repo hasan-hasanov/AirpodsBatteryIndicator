@@ -134,6 +134,7 @@ namespace AirpodsBatteryIndicator
             this.trayControl.Text = "Connecting...";
             this.trayControl.Visible = true;
             this.trayControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TrayControl_MouseClick);
+            this.trayControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TrayControl_MouseClick);
             // 
             // MainForm
             // 
@@ -147,7 +148,7 @@ namespace AirpodsBatteryIndicator
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";

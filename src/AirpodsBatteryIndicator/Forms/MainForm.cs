@@ -2,6 +2,7 @@
 using ABI.Core.Entities;
 using ABI.Core.Queries;
 using System;
+using System.Drawing;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,8 +25,7 @@ namespace AirpodsBatteryIndicator
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
             contextMenuStrip.Items.Add("Open", null, (sender, e) =>
             {
-                Show();
-                this.WindowState = FormWindowState.Normal;
+                ShowWindow();
             });
             contextMenuStrip.Items.Add("Exit", null, (sender, e) =>
             {
@@ -33,6 +33,9 @@ namespace AirpodsBatteryIndicator
             });
 
             trayControl.ContextMenuStrip = contextMenuStrip;
+
+            Rectangle workingArea = Screen.GetWorkingArea(this);
+            this.Location = new Point(workingArea.Right - Size.Width, workingArea.Bottom - Size.Height);
         }
 
         private void AirpodsBatteryCheckTimer_Tick(object sender, EventArgs e)
@@ -48,8 +51,7 @@ namespace AirpodsBatteryIndicator
             if (e.CloseReason != CloseReason.ApplicationExitCall)
             {
                 e.Cancel = true;
-                this.WindowState = FormWindowState.Minimized;
-                Hide();
+                HideWindow();
             }
         }
 
@@ -83,9 +85,27 @@ namespace AirpodsBatteryIndicator
         {
             if (e.Button == MouseButtons.Left)
             {
-                Show();
-                this.WindowState = FormWindowState.Normal;
+                if (WindowState == FormWindowState.Minimized)
+                {
+                    ShowWindow();
+                }
+                else
+                {
+                    HideWindow();
+                }
             }
+        }
+
+        private void ShowWindow()
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void HideWindow()
+        {
+            this.WindowState = FormWindowState.Minimized;
+            Hide();
         }
     }
 }
