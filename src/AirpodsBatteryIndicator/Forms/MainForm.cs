@@ -20,6 +20,19 @@ namespace AirpodsBatteryIndicator
             InitializeComponent();
 
             _getAirpodsBatteryStatusQueryHandler = getAirpodsBatteryStatusQueryHandler;
+
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            contextMenuStrip.Items.Add("Open", null, (sender, e) =>
+            {
+                Show();
+                this.WindowState = FormWindowState.Normal;
+            });
+            contextMenuStrip.Items.Add("Exit", null, (sender, e) =>
+            {
+                Application.Exit();
+            });
+
+            trayControl.ContextMenuStrip = contextMenuStrip;
         }
 
         private void AirpodsBatteryCheckTimer_Tick(object sender, EventArgs e)
@@ -32,9 +45,12 @@ namespace AirpodsBatteryIndicator
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
-            this.WindowState = FormWindowState.Minimized;
-            Hide();
+            if (e.CloseReason != CloseReason.ApplicationExitCall)
+            {
+                e.Cancel = true;
+                this.WindowState = FormWindowState.Minimized;
+                Hide();
+            }
         }
 
         private async Task FetchAirpodsBatteryStatus()
@@ -60,6 +76,15 @@ namespace AirpodsBatteryIndicator
                 // TODO: Once ensured it works properly on production make a better error handler.
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
+            }
+        }
+
+        private void TrayControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Show();
+                this.WindowState = FormWindowState.Normal;
             }
         }
     }

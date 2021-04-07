@@ -133,6 +133,7 @@ namespace AirpodsBatteryIndicator
             this.trayControl.Icon = ((System.Drawing.Icon)(resources.GetObject("trayControl.Icon")));
             this.trayControl.Text = "Connecting...";
             this.trayControl.Visible = true;
+            this.trayControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TrayControl_MouseClick);
             // 
             // MainForm
             // 
