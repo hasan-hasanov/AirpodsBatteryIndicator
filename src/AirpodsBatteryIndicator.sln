@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABI.Adapter.NamedPipe", "AB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABI.Services", "ABI.Services\ABI.Services.csproj", "{C2983026-91C9-46E4-BEE0-9E716979DBD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABI.Common", "ABI.Common\ABI.Common.csproj", "{EBFB371B-73AE-4743-A80D-20C92DCA3EDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C2983026-91C9-46E4-BEE0-9E716979DBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2983026-91C9-46E4-BEE0-9E716979DBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2983026-91C9-46E4-BEE0-9E716979DBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBFB371B-73AE-4743-A80D-20C92DCA3EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBFB371B-73AE-4743-A80D-20C92DCA3EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBFB371B-73AE-4743-A80D-20C92DCA3EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBFB371B-73AE-4743-A80D-20C92DCA3EDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

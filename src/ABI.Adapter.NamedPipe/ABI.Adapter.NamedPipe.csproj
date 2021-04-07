@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ABI.Common\ABI.Common.csproj" />
     <ProjectReference Include="..\ABI.Core\ABI.Core.csproj" />
   </ItemGroup>
 
