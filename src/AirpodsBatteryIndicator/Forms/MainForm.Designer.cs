@@ -29,6 +29,7 @@ namespace AirpodsBatteryIndicator
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -36,6 +37,7 @@ namespace AirpodsBatteryIndicator
             this.labelRightBud = new System.Windows.Forms.Button();
             this.labelCase = new System.Windows.Forms.Button();
             this.labelLeftBud = new System.Windows.Forms.Button();
+            this.airpodsBatteryCheckTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -119,6 +121,12 @@ namespace AirpodsBatteryIndicator
             this.labelLeftBud.Text = "Connecting...";
             this.labelLeftBud.UseVisualStyleBackColor = true;
             // 
+            // airpodsBatteryCheckTimer
+            // 
+            this.airpodsBatteryCheckTimer.Enabled = true;
+            this.airpodsBatteryCheckTimer.Interval = 10;
+            this.airpodsBatteryCheckTimer.Tick += new System.EventHandler(this.AirpodsBatteryCheckTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -151,6 +159,7 @@ namespace AirpodsBatteryIndicator
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button labelLeftBud;
         private System.Windows.Forms.Button labelCase;
+        private System.Windows.Forms.Timer airpodsBatteryCheckTimer;
     }
 }
 
