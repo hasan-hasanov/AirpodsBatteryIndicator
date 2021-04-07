@@ -11,16 +11,16 @@ namespace ABI.Core.Entities
         public string Error { get; set; }
 
         [JsonProperty("rssi")]
-        public int Rssi { get; set; }
+        public int SignalRange { get; set; }
 
         [JsonProperty("addr")]
-        public string Addr { get; set; }
+        public string DeviceAddress { get; set; }
 
         [JsonProperty("left")]
-        public int Left { get; set; }
+        public int LeftEarbud { get; set; }
 
         [JsonProperty("right")]
-        public int Right { get; set; }
+        public int RightEarbud { get; set; }
 
         [JsonProperty("case")]
         public int Case { get; set; }
@@ -29,12 +29,12 @@ namespace ABI.Core.Entities
         public string Model { get; set; }
 
         [JsonProperty("charging_case")]
-        public bool ChargingCase { get; set; }
+        public bool IsChargingCase { get; set; }
 
         [JsonProperty("charging_right")]
-        public bool ChargingRight { get; set; }
+        public bool IsRightEarbudCharging { get; set; }
 
         [JsonProperty("charging_left")]
-        public bool ChargingLeft { get; set; }
+        public bool IsLeftEarbudCharging { get; set; }
     }
 }

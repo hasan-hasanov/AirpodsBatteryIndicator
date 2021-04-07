@@ -14,7 +14,7 @@ namespace ABI.Adapter.NamedPipe
         public NamedPipeContext()
             : this(async cancellationToken =>
             {
-                using NamedPipeClientStream pipe = new(".", "airpods-service", PipeDirection.In);
+                NamedPipeClientStream pipe = new(".", "airpods-service", PipeDirection.In);
                 await pipe.ConnectAsync(cancellationToken);
 
                 return pipe;

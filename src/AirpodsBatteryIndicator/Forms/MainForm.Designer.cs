@@ -29,20 +29,34 @@ namespace AirpodsBatteryIndicator
         /// </summary>
         private void InitializeComponent()
         {
+            this.lblStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(126, 65);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(38, 15);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.Text = "label1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(350, 200);
+            this.Controls.Add(this.lblStatus);
             this.Name = "MainForm";
             this.Text = "Airpods Battery Status";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label lblStatus;
     }
 }
 

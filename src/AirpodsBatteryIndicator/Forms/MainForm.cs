@@ -9,5 +9,7 @@ namespace AirpodsBatteryIndicator
         {
             InitializeComponent();
         }
+
+        public string BatteryIndicator { get => lblStatus.Text; set => lblStatus.Text = value; }
     }
 }
