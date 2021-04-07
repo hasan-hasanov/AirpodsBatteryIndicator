@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ABI.Services\ABI.Services.csproj" />
+  </ItemGroup>
+
 </Project>

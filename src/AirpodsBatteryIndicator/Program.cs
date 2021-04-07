@@ -1,3 +1,4 @@
+using ABI.Services.Presenters;
 using System;
 using System.Windows.Forms;
 
@@ -11,7 +12,10 @@ namespace AirpodsBatteryIndicator
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            var mainForm = new MainForm();
+            mainForm.Tag = new MainPresenter(mainForm);
+            Application.Run(mainForm);
         }
     }
 }

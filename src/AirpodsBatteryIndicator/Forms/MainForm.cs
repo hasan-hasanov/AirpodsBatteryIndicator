@@ -1,8 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using ABI.Services.Views;
+using System.Windows.Forms;
 
 namespace AirpodsBatteryIndicator
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IMainView
     {
         public MainForm()
         {
