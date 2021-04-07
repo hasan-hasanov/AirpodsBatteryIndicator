@@ -82,7 +82,7 @@ namespace AirpodsBatteryIndicator
             this.labelRightBud.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.labelRightBud.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelRightBud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRightBud.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelRightBud.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelRightBud.Location = new System.Drawing.Point(338, 226);
             this.labelRightBud.Name = "labelRightBud";
             this.labelRightBud.Size = new System.Drawing.Size(110, 36);
@@ -99,7 +99,7 @@ namespace AirpodsBatteryIndicator
             this.labelCase.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.labelCase.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelCase.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelCase.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelCase.Location = new System.Drawing.Point(128, 226);
             this.labelCase.Name = "labelCase";
             this.labelCase.Size = new System.Drawing.Size(204, 36);
@@ -115,7 +115,7 @@ namespace AirpodsBatteryIndicator
             this.labelLeftBud.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.labelLeftBud.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.labelLeftBud.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLeftBud.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelLeftBud.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelLeftBud.Location = new System.Drawing.Point(12, 226);
             this.labelLeftBud.Name = "labelLeftBud";
             this.labelLeftBud.Size = new System.Drawing.Size(110, 36);
