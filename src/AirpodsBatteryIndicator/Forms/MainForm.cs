@@ -16,6 +16,7 @@ namespace AirpodsBatteryIndicator
         private readonly IQueryHandler<GetAirpodsBatteryStatusQuery, BatteryIndicator> _getAirpodsBatteryStatusQueryHandler;
 
         private Task _airpodsTimerOperation;
+        private bool _isFirstStartup = true;
 
         public MainForm(IQueryHandler<GetAirpodsBatteryStatusQuery, BatteryIndicator> getAirpodsBatteryStatusQueryHandler)
         {
@@ -41,7 +42,7 @@ namespace AirpodsBatteryIndicator
 
         private void AirpodsBatteryCheckTimer_Tick(object sender, EventArgs e)
         {
-            if (_airpodsTimerOperation == null)
+            if (_isFirstStartup)
             {
                 SimulateAnimation(labelLeftBud);
                 SimulateAnimation(labelCase);
@@ -50,6 +51,11 @@ namespace AirpodsBatteryIndicator
 
             if (_airpodsTimerOperation == null || _airpodsTimerOperation.IsCompleted)
             {
+                if (_isFirstStartup && _airpodsTimerOperation != null && _airpodsTimerOperation.IsCompleted)
+                {
+                    _isFirstStartup = false;
+                }
+
                 _airpodsTimerOperation = FetchAirpodsBatteryStatus();
             }
         }
@@ -155,7 +161,7 @@ namespace AirpodsBatteryIndicator
         private void SimulateAnimation(Button button)
         {
             button.Text = button.Text += ".";
-            if (button.Text.Length >= 3)
+            if (button.Text.Length > 3)
             {
                 button.Text = ".";
             }

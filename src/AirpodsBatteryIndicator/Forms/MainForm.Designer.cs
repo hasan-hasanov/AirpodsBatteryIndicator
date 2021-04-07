@@ -151,6 +151,7 @@ namespace AirpodsBatteryIndicator
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
@@ -168,7 +169,6 @@ namespace AirpodsBatteryIndicator
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button labelRightBud;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button labelLeftBud;
         private System.Windows.Forms.Button labelCase;
         private System.Windows.Forms.Timer airpodsBatteryCheckTimer;
