@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ABI.Adapter.NamedPipe\ABI.Adapter.NamedPipe.csproj" />
     <ProjectReference Include="..\ABI.Core\ABI.Core.csproj" />
   </ItemGroup>
 
