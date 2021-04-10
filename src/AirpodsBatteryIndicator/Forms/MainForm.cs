@@ -1,9 +1,5 @@
-﻿using ABI.Core.Queries;
-using AirpodsBatteryIndicator.Properties;
-using System;
+﻿using System;
 using System.Drawing;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,13 +32,6 @@ namespace AirpodsBatteryIndicator
 
         private void AirpodsBatteryCheckTimer_Tick(object sender, EventArgs e)
         {
-            if (_isFirstStartup)
-            {
-                SimulateAnimation(labelLeftBud);
-                SimulateAnimation(labelCase);
-                SimulateAnimation(labelRightBud);
-            }
-
             if (_airpodsTimerOperation == null || _airpodsTimerOperation.IsCompleted)
             {
                 if (_isFirstStartup && _airpodsTimerOperation != null && _airpodsTimerOperation.IsCompleted)
@@ -151,15 +140,6 @@ namespace AirpodsBatteryIndicator
         //        trayControl.Icon = Resources.CaseWhiteBackground;
         //    }
         //}
-
-        private void SimulateAnimation(Button button)
-        {
-            button.Text = button.Text += ".";
-            if (button.Text.Length > 3)
-            {
-                button.Text = ".";
-            }
-        }
 
         private void ShowWindow()
         {
