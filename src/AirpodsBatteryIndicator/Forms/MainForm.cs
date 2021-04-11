@@ -8,7 +8,6 @@ namespace AirpodsBatteryIndicator
     public partial class MainForm : Form
     {
         private Task _airpodsTimerOperation;
-        private bool _isFirstStartup = true;
 
         public MainForm()
         {
@@ -34,11 +33,6 @@ namespace AirpodsBatteryIndicator
         {
             if (_airpodsTimerOperation == null || _airpodsTimerOperation.IsCompleted)
             {
-                if (_isFirstStartup && _airpodsTimerOperation != null && _airpodsTimerOperation.IsCompleted)
-                {
-                    _isFirstStartup = false;
-                }
-
                 _airpodsTimerOperation = FetchAirpodsBatteryStatus();
             }
         }
