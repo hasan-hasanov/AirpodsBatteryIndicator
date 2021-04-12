@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="System.Runtime.WindowsRuntime">
+      <HintPath>..\ExternalLibs\System.Runtime.WindowsRuntime.dll</HintPath>
+    </Reference>
     <Reference Include="Windows">
       <HintPath>..\ExternalLibs\Windows.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>

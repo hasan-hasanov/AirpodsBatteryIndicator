@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.Devices.Bluetooth;
+using Windows.Devices.Bluetooth.Advertisement;
+using Windows.Storage.Streams;
 
 namespace AirpodsBatteryIndicator
 {
     public partial class MainForm : Form
     {
         private Task _airpodsTimerOperation;
+        private BluetoothLEAdvertisementWatcher _watcher;
 
         public MainForm()
         {
@@ -65,21 +70,12 @@ namespace AirpodsBatteryIndicator
         {
             try
             {
-                //CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(1));
-                //BatteryIndicator airpods = await _getAirpodsBatteryStatusQueryHandler.HandleAsync(new GetAirpodsBatteryStatusQuery(), cancellationTokenSource.Token);
+                _watcher = new BluetoothLEAdvertisementWatcher();
+                _watcher.Received += Watcher_Received;
+                _watcher.ScanningMode = BluetoothLEScanningMode.Passive;
+                _watcher.Start();
 
-                //StringBuilder sb = new StringBuilder();
-                //sb.AppendLine(airpods.LeftEarbud < 0 ? "Left: N/A" : $"Left: {airpods.LeftEarbud} %")
-                //    .AppendLine(airpods.Case < 0 ? "Case: N/A" : $"Case: {airpods.Case} %")
-                //    .AppendLine(airpods.RightEarbud < 0 ? "Right: N/A" : $"Right: {airpods.RightEarbud} %");
-
-                //trayControl.Text = sb.ToString();
-
-                //labelLeftBud.Text = airpods.LeftEarbud < 0 ? "N/A" : $"{airpods.LeftEarbud} %";
-                //labelCase.Text = airpods.Case < 0 ? "N/A" : $"{airpods.Case} %";
-                //labelRightBud.Text = airpods.RightEarbud < 0 ? "N/A" : $"{airpods.RightEarbud} %";
-
-                //SetTryIconRegardingBattery(airpods);
+                await Task.Delay(10_000);
             }
             catch (Exception ex)
             {
@@ -87,6 +83,54 @@ namespace AirpodsBatteryIndicator
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
+        }
+
+        private async void Watcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
+        {
+            var manufacturerData = args.Advertisement.ManufacturerData.ToList().SingleOrDefault(c => c.CompanyId == 76);
+            if (manufacturerData != null)
+            {
+                var rawData = new byte[manufacturerData.Data.Length];
+                if (manufacturerData.Data.Length == 27)
+                {
+                    // This is necesseary because otherwise BLE wathcer picks up my phone too.
+                    // This filters the phone and picks only the airpods
+                    var device = await BluetoothLEDevice.FromBluetoothAddressAsync(args.BluetoothAddress);
+                    if (device != null)
+                    {
+                        using (DataReader reader = DataReader.FromBuffer(manufacturerData.Data))
+                        {
+                            reader.ReadBytes(rawData);
+                        }
+
+                        char[] hex = BitConverter.ToString(rawData).Split("-").SelectMany(s => s).ToArray();
+
+                        var isFlippedBinary = Convert.ToString(short.Parse(hex[10].ToString()) + 0x10, 2);
+                        var isFlippedBit = isFlippedBinary[3] == '0';
+
+                        // Debug.WriteLine($"{Guid.NewGuid()}  {args.BluetoothAddress}  {value}, {value2}, {value3}, {isFlippedBinary}, {isFlippedBit}");
+                    }
+                }
+            }
+
+
+            //CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+            //BatteryIndicator airpods = await _getAirpodsBatteryStatusQueryHandler.HandleAsync(new GetAirpodsBatteryStatusQuery(), cancellationTokenSource.Token);
+
+            //StringBuilder sb = new StringBuilder();
+            //sb.AppendLine(airpods.LeftEarbud < 0 ? "Left: N/A" : $"Left: {airpods.LeftEarbud} %")
+            //    .AppendLine(airpods.Case < 0 ? "Case: N/A" : $"Case: {airpods.Case} %")
+            //    .AppendLine(airpods.RightEarbud < 0 ? "Right: N/A" : $"Right: {airpods.RightEarbud} %");
+
+            //trayControl.Text = sb.ToString();
+
+            //labelLeftBud.Text = airpods.LeftEarbud < 0 ? "N/A" : $"{airpods.LeftEarbud} %";
+            //labelCase.Text = airpods.Case < 0 ? "N/A" : $"{airpods.Case} %";
+            //labelRightBud.Text = airpods.RightEarbud < 0 ? "N/A" : $"{airpods.RightEarbud} %";
+
+            //SetTryIconRegardingBattery(airpods);
+
+            // Unblock
         }
 
         //private void SetTryIconRegardingBattery(BatteryIndicator airpods)

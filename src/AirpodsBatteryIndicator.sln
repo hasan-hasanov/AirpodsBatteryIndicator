@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalLibs", "ExternalLibs", "{ED881B7B-55B1-4DE9-9106-ED7E14A096C1}"
 	ProjectSection(SolutionItems) = preProject
 		ExternalLibs\Windows.winmd = ExternalLibs\Windows.winmd
+		ExternalLibs\System.Runtime.WindowsRuntime.dll = ExternalLibs\System.Runtime.WindowsRuntime.dll
 	EndProjectSection
 EndProject
 Global
