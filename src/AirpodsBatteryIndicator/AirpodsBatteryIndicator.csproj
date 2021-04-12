@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ABI.Core\ABI.Core.csproj" />
+    <ProjectReference Include="..\ABI.Common\ABI.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ABI.Common.Constants;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -87,11 +88,11 @@ namespace AirpodsBatteryIndicator
 
         private async void Watcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
         {
-            var manufacturerData = args.Advertisement.ManufacturerData.ToList().SingleOrDefault(c => c.CompanyId == 76);
+            var manufacturerData = args.Advertisement.ManufacturerData.ToList().FirstOrDefault(c => c.CompanyId == AppleConstants.CompanyId);
             if (manufacturerData != null)
             {
                 var rawData = new byte[manufacturerData.Data.Length];
-                if (manufacturerData.Data.Length == 27)
+                if (manufacturerData.Data.Length == AppleConstants.ManufacturerDataLenght)
                 {
                     // This is necesseary because otherwise BLE wathcer picks up my phone too.
                     // This filters the phone and picks only the airpods
@@ -105,10 +106,8 @@ namespace AirpodsBatteryIndicator
 
                         char[] hex = BitConverter.ToString(rawData).Split("-").SelectMany(s => s).ToArray();
 
-                        var isFlippedBinary = Convert.ToString(short.Parse(hex[10].ToString()) + 0x10, 2);
-                        var isFlippedBit = isFlippedBinary[3] == '0';
 
-                        // Debug.WriteLine($"{Guid.NewGuid()}  {args.BluetoothAddress}  {value}, {value2}, {value3}, {isFlippedBinary}, {isFlippedBit}");
+
                     }
                 }
             }
@@ -131,6 +130,12 @@ namespace AirpodsBatteryIndicator
             //SetTryIconRegardingBattery(airpods);
 
             // Unblock
+        }
+
+        private bool IsFlipped(char[] hex)
+        {
+            string isFlippedInfoBinary = Convert.ToString(short.Parse(hex[10].ToString()) + 0x10, 2);
+            return isFlippedInfoBinary[3] == '0';
         }
 
         //private void SetTryIconRegardingBattery(BatteryIndicator airpods)
