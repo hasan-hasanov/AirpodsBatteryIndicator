@@ -78,6 +78,7 @@ namespace AirpodsBatteryIndicator
                 _watcher.ScanningMode = BluetoothLEScanningMode.Passive;
                 _watcher.Start();
 
+                // TODO: Put a lock here instead of delaying
                 await Task.Delay(10_000);
             }
             catch (Exception ex)
@@ -117,15 +118,18 @@ namespace AirpodsBatteryIndicator
 
                         trayControl.Text = sb.ToString();
 
-                        labelLeftBud.Text = airpodsBle.LeftEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.LeftEarbudBatteryLevel} %";
-                        labelCase.Text = airpodsBle.CaseBatteryLevel < 0 ? "N/A" : $"{airpodsBle.CaseBatteryLevel} %";
-                        labelRightBud.Text = airpodsBle.RightEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.RightEarbudBatteryLevel} %";
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            labelLeftBud.Text = airpodsBle.LeftEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.LeftEarbudBatteryLevel} %";
+                            labelCase.Text = airpodsBle.CaseBatteryLevel < 0 ? "N/A" : $"{airpodsBle.CaseBatteryLevel} %";
+                            labelRightBud.Text = airpodsBle.RightEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.RightEarbudBatteryLevel} %";
+                        });
 
                         SetTryIconRegardingBattery(airpodsBle);
 
                         _watcher.Stop();
 
-                        // Unblock
+                        // TODO: Remove the above lock here
                     }
                 }
             }
