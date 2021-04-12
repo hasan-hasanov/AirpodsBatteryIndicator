@@ -87,6 +87,11 @@ namespace AirpodsBatteryIndicator
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
+            finally
+            {
+                _watcher.Received -= Watcher_Received;
+                _watcher.Stop();
+            }
         }
 
         private async void Watcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
@@ -126,8 +131,6 @@ namespace AirpodsBatteryIndicator
                         });
 
                         SetTryIconRegardingBattery(airpodsBle);
-
-                        _watcher.Stop();
 
                         // TODO: Remove the above lock here
                     }
