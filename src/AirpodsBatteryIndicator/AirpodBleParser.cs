@@ -1,5 +1,6 @@
 ﻿using ABI.Common.Constants;
 using System;
+using System.Globalization;
 
 namespace AirpodsBatteryIndicator
 {
@@ -24,7 +25,9 @@ namespace AirpodsBatteryIndicator
 
         public int RightEarbudBatteryLevel => _rightEarbudBatteryLevel;
 
-        public int CaseEarbudBatteryLevel => _caseBatteryLevel;
+        public int CaseBatteryLevel => _caseBatteryLevel;
+
+        public bool IsConnected => _leftEarbudBatteryLevel > 0 || _rightEarbudBatteryLevel > 0 || _caseBatteryLevel > 0;
 
 
         private bool IsFlipped(char[] hex)
@@ -36,18 +39,24 @@ namespace AirpodsBatteryIndicator
         private int ParseLeftEarbudBatteryLevel(char[] hex)
         {
             int leftEarbudPosition = _isFlipped ? AppleConstants.LeftEarbudFlippedPosition : AppleConstants.LeftEarbudNotFlippedPosition;
-            return int.Parse(hex[leftEarbudPosition].ToString());
+            int batteryLevel = int.Parse(hex[leftEarbudPosition].ToString(), NumberStyles.HexNumber);
+
+            return batteryLevel == 15 ? -1 : batteryLevel * 10;
         }
 
         private int ParseRightEarbudBatteryLevel(char[] hex)
         {
             int rightEarbudPosition = _isFlipped ? AppleConstants.RightEarbudFlippedPosition : AppleConstants.RightEarbudNotFlippedPosition;
-            return int.Parse(hex[rightEarbudPosition].ToString());
+            int batteryLevel = int.Parse(hex[rightEarbudPosition].ToString(), NumberStyles.HexNumber);
+
+            return batteryLevel == 15 ? -1 : batteryLevel * 10;
         }
 
         private int ParseCaseBatteryLevel(char[] hex)
         {
-            return int.Parse(hex[AppleConstants.CasePosition].ToString());
+            int batteryLevel = int.Parse(hex[AppleConstants.CasePosition].ToString(), NumberStyles.HexNumber);
+
+            return batteryLevel == 15 ? -1 : batteryLevel * 10;
         }
     }
 }

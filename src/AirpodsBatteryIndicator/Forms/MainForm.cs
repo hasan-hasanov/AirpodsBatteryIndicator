@@ -1,7 +1,9 @@
 ﻿using ABI.Common.Constants;
+using AirpodsBatteryIndicator.Properties;
 using System;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Windows.Devices.Bluetooth;
@@ -105,31 +107,28 @@ namespace AirpodsBatteryIndicator
                         }
 
                         char[] hex = BitConverter.ToString(rawData).Split("-").SelectMany(s => s).ToArray();
+                        AirpodBleParser airpodsBle = new AirpodBleParser(hex);
 
 
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine(airpodsBle.LeftEarbudBatteryLevel < 0 ? "Left: N/A" : $"Left: {airpodsBle.LeftEarbudBatteryLevel} %")
+                            .AppendLine(airpodsBle.CaseBatteryLevel < 0 ? "Case: N/A" : $"Case: {airpodsBle.CaseBatteryLevel} %")
+                            .AppendLine(airpodsBle.RightEarbudBatteryLevel < 0 ? "Right: N/A" : $"Right: {airpodsBle.RightEarbudBatteryLevel} %");
 
+                        trayControl.Text = sb.ToString();
+
+                        labelLeftBud.Text = airpodsBle.LeftEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.LeftEarbudBatteryLevel} %";
+                        labelCase.Text = airpodsBle.CaseBatteryLevel < 0 ? "N/A" : $"{airpodsBle.CaseBatteryLevel} %";
+                        labelRightBud.Text = airpodsBle.RightEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.RightEarbudBatteryLevel} %";
+
+                        SetTryIconRegardingBattery(airpodsBle);
+
+                        _watcher.Stop();
+
+                        // Unblock
                     }
                 }
             }
-
-
-            //CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(1));
-            //BatteryIndicator airpods = await _getAirpodsBatteryStatusQueryHandler.HandleAsync(new GetAirpodsBatteryStatusQuery(), cancellationTokenSource.Token);
-
-            //StringBuilder sb = new StringBuilder();
-            //sb.AppendLine(airpods.LeftEarbud < 0 ? "Left: N/A" : $"Left: {airpods.LeftEarbud} %")
-            //    .AppendLine(airpods.Case < 0 ? "Case: N/A" : $"Case: {airpods.Case} %")
-            //    .AppendLine(airpods.RightEarbud < 0 ? "Right: N/A" : $"Right: {airpods.RightEarbud} %");
-
-            //trayControl.Text = sb.ToString();
-
-            //labelLeftBud.Text = airpods.LeftEarbud < 0 ? "N/A" : $"{airpods.LeftEarbud} %";
-            //labelCase.Text = airpods.Case < 0 ? "N/A" : $"{airpods.Case} %";
-            //labelRightBud.Text = airpods.RightEarbud < 0 ? "N/A" : $"{airpods.RightEarbud} %";
-
-            //SetTryIconRegardingBattery(airpods);
-
-            // Unblock
         }
 
         private bool IsFlipped(char[] hex)
@@ -138,51 +137,51 @@ namespace AirpodsBatteryIndicator
             return isFlippedInfoBinary[3] == '0';
         }
 
-        //private void SetTryIconRegardingBattery(BatteryIndicator airpods)
-        //{
-        //    if (airpods.Status == 1)
-        //    {
-        //        int minPercentage = airpods.Case;
-        //        if (airpods.LeftEarbud > 0)
-        //        {
-        //            minPercentage = airpods.LeftEarbud;
-        //        }
-        //        if (airpods.RightEarbud > 0)
-        //        {
-        //            minPercentage = airpods.RightEarbud;
-        //        }
+        private void SetTryIconRegardingBattery(AirpodBleParser airpods)
+        {
+            if (airpods.IsConnected)
+            {
+                int minPercentage = airpods.CaseBatteryLevel;
+                if (airpods.LeftEarbudBatteryLevel > 0)
+                {
+                    minPercentage = airpods.LeftEarbudBatteryLevel;
+                }
+                if (airpods.RightEarbudBatteryLevel > 0)
+                {
+                    minPercentage = airpods.RightEarbudBatteryLevel;
+                }
 
-        //        if (airpods.RightEarbud > 0 && airpods.RightEarbud < airpods.LeftEarbud)
-        //        {
-        //            minPercentage = airpods.RightEarbud;
-        //        }
+                if (airpods.RightEarbudBatteryLevel > 0 && airpods.RightEarbudBatteryLevel < airpods.LeftEarbudBatteryLevel)
+                {
+                    minPercentage = airpods.RightEarbudBatteryLevel;
+                }
 
-        //        if (minPercentage > 75)
-        //        {
-        //            trayControl.Icon = Resources._100_white;
-        //        }
-        //        else if (minPercentage > 50)
-        //        {
-        //            trayControl.Icon = Resources._75_white;
-        //        }
-        //        else if (minPercentage > 30)
-        //        {
-        //            trayControl.Icon = Resources._50_white;
-        //        }
-        //        else if (minPercentage > 15)
-        //        {
-        //            trayControl.Icon = Resources._30_white;
-        //        }
-        //        else
-        //        {
-        //            trayControl.Icon = Resources._15_white;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        trayControl.Icon = Resources.CaseWhiteBackground;
-        //    }
-        //}
+                if (minPercentage > 75)
+                {
+                    trayControl.Icon = Resources._100_white;
+                }
+                else if (minPercentage > 50)
+                {
+                    trayControl.Icon = Resources._75_white;
+                }
+                else if (minPercentage > 30)
+                {
+                    trayControl.Icon = Resources._50_white;
+                }
+                else if (minPercentage > 15)
+                {
+                    trayControl.Icon = Resources._30_white;
+                }
+                else
+                {
+                    trayControl.Icon = Resources._15_white;
+                }
+            }
+            else
+            {
+                trayControl.Icon = Resources.CaseWhiteBackground;
+            }
+        }
 
         private void ShowWindow()
         {
