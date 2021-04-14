@@ -18,6 +18,7 @@ namespace AirpodsBatteryIndicator
         private Task _airpodsTimerOperation;
         private BluetoothLEAdvertisementWatcher _watcher;
         private TaskCompletionSource<bool> _taskCompletionSource;
+        private BluetoothLEDevice _airpods;
 
         public MainForm()
         {
@@ -74,10 +75,11 @@ namespace AirpodsBatteryIndicator
         private async Task FetchAirpodsBatteryStatus()
         {
             _taskCompletionSource = new TaskCompletionSource<bool>();
-            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(30)))
+            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(5)))
             {
                 cts.Token.Register(() =>
                 {
+                    _watcher.Stop();
                     if (!_taskCompletionSource.Task.IsCompleted)
                     {
                         _taskCompletionSource.SetResult(false);
@@ -88,6 +90,7 @@ namespace AirpodsBatteryIndicator
                 {
                     _watcher = new BluetoothLEAdvertisementWatcher();
                     _watcher.Received += Watcher_Received;
+                    _watcher.Stopped += Watcher_Stopped;
                     _watcher.ScanningMode = BluetoothLEScanningMode.Passive;
                     _watcher.Start();
 
@@ -105,6 +108,16 @@ namespace AirpodsBatteryIndicator
             }
         }
 
+        private void Watcher_Stopped(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementWatcherStoppedEventArgs args)
+        {
+            if (_airpods == null)
+            {
+                UpdateAirpodsBatteryLevel(new AirpodBleParser());
+            }
+
+            _airpods = null;
+        }
+
         private async void Watcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
         {
             var manufacturerData = args.Advertisement.ManufacturerData.ToList().FirstOrDefault(c => c.CompanyId == AppleConstants.CompanyId);
@@ -115,9 +128,11 @@ namespace AirpodsBatteryIndicator
                 {
                     // This is necesseary because otherwise BLE wathcer picks up my phone too.
                     // This filters the phone and picks only the airpods
-                    var device = await BluetoothLEDevice.FromBluetoothAddressAsync(args.BluetoothAddress);
+                    BluetoothLEDevice device = await BluetoothLEDevice.FromBluetoothAddressAsync(args.BluetoothAddress);
                     if (device != null)
                     {
+                        _airpods = device;
+
                         using (DataReader reader = DataReader.FromBuffer(manufacturerData.Data))
                         {
                             reader.ReadBytes(rawData);
@@ -126,22 +141,7 @@ namespace AirpodsBatteryIndicator
                         char[] hex = BitConverter.ToString(rawData).Split("-").SelectMany(s => s).ToArray();
                         AirpodBleParser airpodsBle = new AirpodBleParser(hex);
 
-
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine(airpodsBle.LeftEarbudBatteryLevel < 0 ? "Left: N/A" : $"Left: {airpodsBle.LeftEarbudBatteryLevel} %")
-                            .AppendLine(airpodsBle.CaseBatteryLevel < 0 ? "Case: N/A" : $"Case: {airpodsBle.CaseBatteryLevel} %")
-                            .AppendLine(airpodsBle.RightEarbudBatteryLevel < 0 ? "Right: N/A" : $"Right: {airpodsBle.RightEarbudBatteryLevel} %");
-
-                        trayControl.Text = sb.ToString();
-
-                        this.Invoke((MethodInvoker)delegate
-                        {
-                            labelLeftBud.Text = airpodsBle.LeftEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.LeftEarbudBatteryLevel} %";
-                            labelCase.Text = airpodsBle.CaseBatteryLevel < 0 ? "N/A" : $"{airpodsBle.CaseBatteryLevel} %";
-                            labelRightBud.Text = airpodsBle.RightEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.RightEarbudBatteryLevel} %";
-                        });
-
-                        SetTryIconRegardingBattery(airpodsBle);
+                        UpdateAirpodsBatteryLevel(airpodsBle);
 
                         if (!_taskCompletionSource.Task.IsCompleted)
                         {
@@ -150,6 +150,25 @@ namespace AirpodsBatteryIndicator
                     }
                 }
             }
+        }
+
+        private void UpdateAirpodsBatteryLevel(AirpodBleParser airpodsBle)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(airpodsBle.LeftEarbudBatteryLevel < 0 ? "Left: N/A" : $"Left: {airpodsBle.LeftEarbudBatteryLevel} %")
+                .AppendLine(airpodsBle.CaseBatteryLevel < 0 ? "Case: N/A" : $"Case: {airpodsBle.CaseBatteryLevel} %")
+                .AppendLine(airpodsBle.RightEarbudBatteryLevel < 0 ? "Right: N/A" : $"Right: {airpodsBle.RightEarbudBatteryLevel} %");
+
+            trayControl.Text = sb.ToString();
+
+            this.Invoke((MethodInvoker)delegate
+            {
+                labelLeftBud.Text = airpodsBle.LeftEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.LeftEarbudBatteryLevel} %";
+                labelCase.Text = airpodsBle.CaseBatteryLevel < 0 ? "N/A" : $"{airpodsBle.CaseBatteryLevel} %";
+                labelRightBud.Text = airpodsBle.RightEarbudBatteryLevel < 0 ? "N/A" : $"{airpodsBle.RightEarbudBatteryLevel} %";
+            });
+
+            SetTryIconRegardingBattery(airpodsBle);
         }
 
         private void SetTryIconRegardingBattery(AirpodBleParser airpods)

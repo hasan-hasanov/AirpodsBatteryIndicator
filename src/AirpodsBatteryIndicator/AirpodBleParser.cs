@@ -12,6 +12,13 @@ namespace AirpodsBatteryIndicator
         private readonly int _rightEarbudBatteryLevel;
         private readonly int _caseBatteryLevel;
 
+        public AirpodBleParser()
+        {
+            _leftEarbudBatteryLevel = -1;
+            _rightEarbudBatteryLevel = -1;
+            _caseBatteryLevel = -1;
+        }
+
         public AirpodBleParser(char[] hex)
         {
             _isFlipped = IsFlipped(hex);
