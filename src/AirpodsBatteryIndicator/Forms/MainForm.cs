@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Windows.Devices.Bluetooth;
@@ -16,6 +17,7 @@ namespace AirpodsBatteryIndicator
     {
         private Task _airpodsTimerOperation;
         private BluetoothLEAdvertisementWatcher _watcher;
+        private TaskCompletionSource<bool> _taskCompletionSource;
 
         public MainForm()
         {
@@ -71,26 +73,35 @@ namespace AirpodsBatteryIndicator
 
         private async Task FetchAirpodsBatteryStatus()
         {
-            try
+            _taskCompletionSource = new TaskCompletionSource<bool>();
+            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(30)))
             {
-                _watcher = new BluetoothLEAdvertisementWatcher();
-                _watcher.Received += Watcher_Received;
-                _watcher.ScanningMode = BluetoothLEScanningMode.Passive;
-                _watcher.Start();
+                cts.Token.Register(() =>
+                {
+                    if (!_taskCompletionSource.Task.IsCompleted)
+                    {
+                        _taskCompletionSource.SetResult(false);
+                    }
+                });
 
-                // TODO: Put a lock here instead of delaying
-                await Task.Delay(10_000);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Once ensured it works properly on production make a better error handler.
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
-            finally
-            {
-                _watcher.Received -= Watcher_Received;
-                _watcher.Stop();
+                try
+                {
+                    _watcher = new BluetoothLEAdvertisementWatcher();
+                    _watcher.Received += Watcher_Received;
+                    _watcher.ScanningMode = BluetoothLEScanningMode.Passive;
+                    _watcher.Start();
+
+                    await _taskCompletionSource.Task;
+                }
+                catch
+                {
+                    // TODO: Write these error to an aproppriate place
+                }
+                finally
+                {
+                    _watcher.Received -= Watcher_Received;
+                    _watcher.Stop();
+                }
             }
         }
 
@@ -132,7 +143,10 @@ namespace AirpodsBatteryIndicator
 
                         SetTryIconRegardingBattery(airpodsBle);
 
-                        // TODO: Remove the above lock here
+                        if (!_taskCompletionSource.Task.IsCompleted)
+                        {
+                            _taskCompletionSource.SetResult(true);
+                        }
                     }
                 }
             }
