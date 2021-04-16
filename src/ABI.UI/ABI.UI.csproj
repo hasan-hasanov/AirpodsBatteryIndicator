@@ -11,9 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\Airpods\Case.png" />
-    <Resource Include="Images\Airpods\Left.png" />
-    <Resource Include="Images\Airpods\Right.png" />
+    <Resource Include="Images\Airpods\Dark\Case.png" />
+    <Resource Include="Images\Airpods\Dark\Left.png" />
+    <Resource Include="Images\Airpods\Dark\Right.png" />
+    <Resource Include="Images\Airpods\Light\Case.png" />
+    <Resource Include="Images\Airpods\Light\Left.png" />
+    <Resource Include="Images\Airpods\Light\Right.png" />
     <Resource Include="Images\TrayIcons\100_white.ico" />
     <Resource Include="Images\TrayIcons\15_white.ico" />
     <Resource Include="Images\TrayIcons\30_white.ico" />

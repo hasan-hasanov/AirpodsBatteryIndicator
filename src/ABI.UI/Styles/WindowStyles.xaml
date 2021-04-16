@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="LightWindowStyle" TargetType="Window">
+        <Setter Property="Background" Value="White" />
+    </Style>
+
+    <Style x:Key="DarkWindowStyle" TargetType="Window">
+        <Setter Property="Background" Value="Black" />
+    </Style>
+
+</ResourceDictionary>
