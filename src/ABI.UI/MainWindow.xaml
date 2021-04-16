@@ -6,8 +6,10 @@
     xmlns:local="clr-namespace:ABI.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tb="http://www.hardcodet.net/taskbar"
+    ResizeMode="NoResize"
     Title="MainWindow"
-    Width="370"
+    WindowStyle="None"
+    Width="420"
     Height="250"
     mc:Ignorable="d">
     <Grid>
