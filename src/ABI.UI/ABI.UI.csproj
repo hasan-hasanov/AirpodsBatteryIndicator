@@ -6,4 +6,20 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Airpods\Case.png" />
+    <Resource Include="Images\Airpods\Left.png" />
+    <Resource Include="Images\Airpods\Right.png" />
+    <Resource Include="Images\TrayIcons\100_white.ico" />
+    <Resource Include="Images\TrayIcons\15_white.ico" />
+    <Resource Include="Images\TrayIcons\30_white.ico" />
+    <Resource Include="Images\TrayIcons\50_white.ico" />
+    <Resource Include="Images\TrayIcons\75_white.ico" />
+    <Resource Include="Images\TrayIcons\CaseWhiteBackground.ico" />
+  </ItemGroup>
+
 </Project>
