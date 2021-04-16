@@ -69,8 +69,15 @@
         <tb:TaskbarIcon
             Name="tbIcon"
             Grid.Row="2"
-            IconSource=".\Images\TrayIcons\CaseWhiteBackground.ico"
-            ToolTipText="hello world" />
+            Style="{StaticResource DefaultTrayIconStyle}">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Open" />
+                    <MenuItem Header="Settings" />
+                    <MenuItem Header="Exit" />
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
 
     </Grid>
 </Window>
