@@ -48,7 +48,7 @@
             Grid.Column="0"
             Margin="8,0,0,0"
             HorizontalAlignment="Left"
-            Content="N/A"
+            Content="{Binding Path=LeftEarbudBattery, Mode=OneWay}"
             Style="{StaticResource LightBatteryIndicatorLabelsStyle}" />
 
         <Label
