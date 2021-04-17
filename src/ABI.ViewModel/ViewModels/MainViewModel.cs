@@ -1,5 +1,5 @@
 ﻿using ABI.Common.Enums;
-using ABI.Model.AirpodModels;
+using ABI.Model.Models;
 using ABI.ViewModel.Commands;
 using System;
 using System.Windows.Input;
@@ -8,19 +8,11 @@ namespace ABI.ViewModel.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private AirpodsStatus _airpodsStatus;
-
-        private string leftEarbudBattery;
-        private string caseBattery;
-        private string rightEarbudBattery;
+        private AirpodsInfoModel airpodsInfoModel;
 
         public MainViewModel()
         {
-            _airpodsStatus = new AirpodsStatus();
-
-            LeftEarbudBattery = _airpodsStatus.LeftEarbudBattery.ToString();
-            CaseBattery = _airpodsStatus.CaseBattery.ToString();
-            RightEarbudBattery = _airpodsStatus.RightEarbudBattery.ToString();
+            AirpodsInfo = new AirpodsInfoModel();
 
             OpenClickCommand = new RelayCommand<object>(e => OpenClick(), p => true);
             SettingsClickCommand = new RelayCommand<object>(e => SettingsClick(), p => true);
@@ -39,56 +31,20 @@ namespace ABI.ViewModel.ViewModels
         public ICommand TrayIconClickCommand { get; set; }
         public ICommand TrayIconDoubleClickCommand { get; set; }
 
-        public string LeftEarbudBattery
+        public AirpodsInfoModel AirpodsInfo
         {
             get
             {
-                return leftEarbudBattery;
+                return airpodsInfoModel;
             }
             set
             {
-                if (leftEarbudBattery != value)
+                if (airpodsInfoModel != value)
                 {
-                    leftEarbudBattery = (value == "-1") ? "N/A" : value;
-                    RaisePropertyChanged(nameof(LeftEarbudBattery));
+                    airpodsInfoModel = value;
+                    RaisePropertyChanged(nameof(AirpodsInfo));
                 }
             }
-        }
-
-        public string CaseBattery
-        {
-            get
-            {
-                return caseBattery;
-            }
-            set
-            {
-                if (caseBattery != value)
-                {
-                    caseBattery = (value == "-1") ? "N/A" : value;
-                    RaisePropertyChanged(nameof(CaseBattery));
-                }
-            }
-        }
-
-        public string RightEarbudBattery
-        {
-            get
-            {
-                return rightEarbudBattery;
-            }
-            set
-            {
-                if (rightEarbudBattery != value)
-                {
-                    rightEarbudBattery = (value == "-1") ? "N/A" : value;
-                    RaisePropertyChanged(nameof(RightEarbudBattery));
-                }
-            }
-        }
-
-        public void Loaded()
-        {
         }
 
         public void ToggleNormalizeMinimize(WindowState state)

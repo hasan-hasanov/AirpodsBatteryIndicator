@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ABI.Model
+namespace ABI.Model.Models
 {
     public class BaseModel : INotifyPropertyChanged
     {

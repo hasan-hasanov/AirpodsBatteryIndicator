@@ -22,8 +22,6 @@ namespace ABI.UI
 
         private void InitializeMvvm(MainViewModel mainViewModel)
         {
-            Loaded += (s, e) => mainViewModel.Loaded();
-
             mainViewModel.ExitAction = new Action(Close);
             mainViewModel.MinimizeAction = () => WindowState = WindowState.Minimized;
             mainViewModel.NormalizeAction = () => WindowState = WindowState.Normal;
