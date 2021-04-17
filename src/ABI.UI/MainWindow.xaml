@@ -48,14 +48,14 @@
             Grid.Column="0"
             Margin="8,0,0,0"
             HorizontalAlignment="Left"
-            Content="{Binding Path=AirpodsStatus.LeftEarbudBattery, Mode=OneWay}"
+            Content="{Binding Path=LeftEarbudBattery, Mode=OneWay}"
             Style="{StaticResource LightBatteryIndicatorLabelsStyle}" />
 
         <Label
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Center"
-            Content="{Binding Path=AirpodsStatus.CaseBattery, Mode=OneWay}"
+            Content="{Binding Path=CaseBattery, Mode=OneWay}"
             Style="{StaticResource LightBatteryIndicatorLabelsStyle}" />
 
         <Label
@@ -63,7 +63,7 @@
             Grid.Column="2"
             Margin="0,0,8,0"
             HorizontalAlignment="Right"
-            Content="{Binding Path=AirpodsStatus.RightEarbudBattery, Mode=OneWay}"
+            Content="{Binding Path=RightEarbudBattery, Mode=OneWay}"
             Style="{StaticResource LightBatteryIndicatorLabelsStyle}" />
 
         <tb:TaskbarIcon

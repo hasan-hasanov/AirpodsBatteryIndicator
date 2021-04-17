@@ -22,9 +22,11 @@ namespace ABI.UI
 
         private void InitializeMvvm(MainViewModel mainViewModel)
         {
-            mainViewModel.ExitAction = new Action(this.Close);
-            mainViewModel.HideAction = new Action(this.Hide);
-            mainViewModel.ShowAction = new Action(this.Show);
+            Loaded += (s, e) => mainViewModel.Loaded();
+
+            mainViewModel.ExitAction = new Action(Close);
+            mainViewModel.HideAction = new Action(Hide);
+            mainViewModel.ShowAction = new Action(Show);
         }
     }
 }
