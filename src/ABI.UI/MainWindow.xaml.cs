@@ -1,5 +1,6 @@
 ﻿using ABI.ViewModel.Screens;
 using ABI.ViewModel.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -10,6 +11,8 @@ namespace ABI.UI
         public MainWindow(MainViewModel mainViewModel)
         {
             InitializeComponent();
+            mainViewModel.ExitAction = new Action(this.Close);
+
             this.DataContext = mainViewModel;
 
             // Position the window to the bottom right of the screen

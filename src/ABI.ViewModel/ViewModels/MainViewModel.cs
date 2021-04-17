@@ -1,4 +1,5 @@
 ﻿using ABI.ViewModel.Commands;
+using System;
 using System.Windows.Input;
 
 namespace ABI.ViewModel.ViewModels
@@ -9,12 +10,14 @@ namespace ABI.ViewModel.ViewModels
         {
             LeftEarbudBattery = "90";
 
-            OpenClickCommand = new RelayCommand(e => OpenClick(), p => true);
-            SettingsClickCommand = new RelayCommand(e => SettingsClick(), p => true);
-            ExitClickCommand = new RelayCommand(e => ExitClick(), p => true);
+            OpenClickCommand = new RelayCommand<object>(e => OpenClick(), p => true);
+            SettingsClickCommand = new RelayCommand<object>(e => SettingsClick(), p => true);
+            ExitClickCommand = new RelayCommand<object>(e => ExitClick(), p => true);
         }
 
         public string LeftEarbudBattery { get; set; }
+
+        public Action ExitAction { get; set; }
 
         public ICommand OpenClickCommand { get; set; }
 
@@ -34,7 +37,7 @@ namespace ABI.ViewModel.ViewModels
 
         public void ExitClick()
         {
-
+            ExitAction();
         }
     }
 }
