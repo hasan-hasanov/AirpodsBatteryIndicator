@@ -1,4 +1,4 @@
-﻿namespace ABI.Common.Models
+﻿namespace ABI.Model.AirpodModels
 {
     public class AirpodsStatus : BaseModel
     {

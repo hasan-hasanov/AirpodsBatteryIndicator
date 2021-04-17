@@ -1,4 +1,4 @@
-﻿namespace ABI.UI.ViewModels
+﻿namespace ABI.ViewModel.ViewModels
 {
     public class MainViewModel
     {

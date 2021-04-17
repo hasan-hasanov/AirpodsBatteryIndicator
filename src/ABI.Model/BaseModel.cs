@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ABI.Common.Models
+namespace ABI.Model
 {
     public class BaseModel
     {
