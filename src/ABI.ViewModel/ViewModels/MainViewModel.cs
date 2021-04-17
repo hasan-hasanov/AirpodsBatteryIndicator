@@ -22,17 +22,16 @@ namespace ABI.ViewModel.ViewModels
             CaseBattery = _airpodsStatus.CaseBattery.ToString();
             RightEarbudBattery = _airpodsStatus.RightEarbudBattery.ToString();
 
-
             OpenClickCommand = new RelayCommand<object>(e => OpenClick(), p => true);
             SettingsClickCommand = new RelayCommand<object>(e => SettingsClick(), p => true);
             ExitClickCommand = new RelayCommand<object>(e => ExitClick(), p => true);
-            TrayIconClickCommand = new RelayCommand<WindowState>(e => ToggleMaximizeMinimize(e), p => true);
-            TrayIconDoubleClickCommand = new RelayCommand<WindowState>(e => ToggleMaximizeMinimize(e), p => true);
+            TrayIconClickCommand = new RelayCommand<WindowState>(e => ToggleNormalizeMinimize(e), p => true);
+            TrayIconDoubleClickCommand = new RelayCommand<WindowState>(e => ToggleNormalizeMinimize(e), p => true);
         }
 
         public Action ExitAction { get; set; }
-        public Action HideAction { get; set; }
-        public Action ShowAction { get; set; }
+        public Action MinimizeAction { get; set; }
+        public Action NormalizeAction { get; set; }
 
         public ICommand OpenClickCommand { get; set; }
         public ICommand SettingsClickCommand { get; set; }
@@ -92,13 +91,21 @@ namespace ABI.ViewModel.ViewModels
         {
         }
 
-        public void ToggleMaximizeMinimize(WindowState state)
+        public void ToggleNormalizeMinimize(WindowState state)
         {
+            if (state == WindowState.Normal || state == WindowState.Maximized)
+            {
+                MinimizeAction();
+            }
+            else
+            {
+                NormalizeAction();
+            }
         }
 
         public void OpenClick()
         {
-            ShowAction();
+            NormalizeAction();
         }
 
         public void SettingsClick()

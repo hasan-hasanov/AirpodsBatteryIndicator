@@ -25,8 +25,8 @@ namespace ABI.UI
             Loaded += (s, e) => mainViewModel.Loaded();
 
             mainViewModel.ExitAction = new Action(Close);
-            mainViewModel.HideAction = new Action(Hide);
-            mainViewModel.ShowAction = new Action(Show);
+            mainViewModel.MinimizeAction = () => WindowState = WindowState.Minimized;
+            mainViewModel.NormalizeAction = () => WindowState = WindowState.Normal;
         }
     }
 }
