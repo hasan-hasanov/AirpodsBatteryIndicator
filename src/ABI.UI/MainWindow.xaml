@@ -11,6 +11,7 @@
     Width="420"
     Height="250"
     ResizeMode="NoResize"
+    ShowInTaskbar="False"
     Style="{StaticResource LightWindowStyle}"
     WindowStyle="None"
     mc:Ignorable="d">
