@@ -72,9 +72,9 @@
             Style="{StaticResource DefaultTrayIconStyle}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Open" />
-                    <MenuItem Header="Settings" />
-                    <MenuItem Header="Exit" />
+                    <MenuItem Command="{Binding OpenClickCommand}" Header="Open" />
+                    <MenuItem Command="{Binding SettingsClickCommand}" Header="Settings" />
+                    <MenuItem Command="{Binding ExitClickCommand}" Header="Exit" />
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
