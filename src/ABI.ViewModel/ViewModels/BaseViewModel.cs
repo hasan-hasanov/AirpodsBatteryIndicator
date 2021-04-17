@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace ABI.Model
+namespace ABI.ViewModel.ViewModels
 {
-    public class BaseModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

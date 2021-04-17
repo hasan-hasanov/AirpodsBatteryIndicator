@@ -4,9 +4,16 @@
     {
         private int leftEarbudBattery;
         private int rightEarbudBattery;
-        private int caseBatteryLevel;
+        private int caseBattery;
 
-        public bool IsAvailable => leftEarbudBattery != -1 || rightEarbudBattery != -1 || caseBatteryLevel != -1;
+        public AirpodsStatus()
+        {
+            leftEarbudBattery = -1;
+            rightEarbudBattery = -1;
+            caseBattery = -1;
+        }
+
+        public bool IsAvailable => leftEarbudBattery != -1 || rightEarbudBattery != -1 || caseBattery != -1;
 
         public int LeftEarbudBattery
         {
@@ -34,15 +41,15 @@
             }
         }
 
-        public int CaseBatteryLevel
+        public int CaseBattery
         {
-            get { return caseBatteryLevel; }
+            get { return caseBattery; }
             set
             {
-                if (caseBatteryLevel != value)
+                if (caseBattery != value)
                 {
-                    caseBatteryLevel = value;
-                    RaisePropertyChanged(nameof(CaseBatteryLevel));
+                    caseBattery = value;
+                    RaisePropertyChanged(nameof(CaseBattery));
                 }
             }
         }
