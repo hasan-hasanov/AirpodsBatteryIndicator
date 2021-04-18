@@ -1,5 +1,7 @@
 ﻿using ABI.Common.Enums;
+using ABI.Model.Entities;
 using ABI.Model.Models;
+using ABI.ViewModel.AirpodsBle;
 using ABI.ViewModel.Commands;
 using ABI.ViewModel.Jobs;
 using System;
@@ -10,15 +12,16 @@ namespace ABI.ViewModel.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private AirpodsInfoModel airpodsInfoModel;
-        private BleScannerJob bleScannerJob;
+        private readonly AirpodsBleParser _airpodsBleParser;
+
         private event Action<char[]> onBleStatusChanged;
+        private BleScannerJob bleScannerJob;
 
-        public MainViewModel()
+        public MainViewModel(AirpodsBleParser airpodsBleParser)
         {
-            onBleStatusChanged = new Action<char[]>(OnBleStatusChanged);
+            _airpodsBleParser = airpodsBleParser;
 
-            AirpodsInfo = new AirpodsInfoModel();
+            onBleStatusChanged = new Action<char[]>(OnBleStatusChanged);
             bleScannerJob = new BleScannerJob(onBleStatusChanged);
 
             OpenClickCommand = new RelayCommand<object>(e => OpenClick(), p => true);
@@ -26,11 +29,9 @@ namespace ABI.ViewModel.ViewModels
             ExitClickCommand = new RelayCommand<object>(e => ExitClick(), p => true);
             TrayIconClickCommand = new RelayCommand<WindowState>(e => ToggleNormalizeMinimize(e), p => true);
             TrayIconDoubleClickCommand = new RelayCommand<WindowState>(e => ToggleNormalizeMinimize(e), p => true);
-        }
 
-        public Action ExitAction { get; set; }
-        public Action MinimizeAction { get; set; }
-        public Action NormalizeAction { get; set; }
+            AirpodsInfo = new AirpodsInfoModel();
+        }
 
         public ICommand OpenClickCommand { get; set; }
         public ICommand SettingsClickCommand { get; set; }
@@ -38,6 +39,11 @@ namespace ABI.ViewModel.ViewModels
         public ICommand TrayIconClickCommand { get; set; }
         public ICommand TrayIconDoubleClickCommand { get; set; }
 
+        public Action ExitAction { get; set; }
+        public Action MinimizeAction { get; set; }
+        public Action NormalizeAction { get; set; }
+
+        private AirpodsInfoModel airpodsInfoModel;
         public AirpodsInfoModel AirpodsInfo
         {
             get
@@ -83,6 +89,17 @@ namespace ABI.ViewModel.ViewModels
 
         private void OnBleStatusChanged(char[] obj)
         {
+            if (obj.Length > 0)
+            {
+                AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
+                AirpodsInfo.CaseBattery = airpodsInfo.CaseStatus.ToString();
+                AirpodsInfo.LeftEarbudBattery = airpodsInfo.LeftEarbudStatus.ToString();
+                AirpodsInfo.RightEarbudBattery = airpodsInfo.RightEarbudStatus.ToString();
+            }
+            else
+            {
+                AirpodsInfo = new AirpodsInfoModel();
+            }
         }
     }
 }
