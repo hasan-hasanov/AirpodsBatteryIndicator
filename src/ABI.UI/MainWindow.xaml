@@ -84,7 +84,10 @@
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="{Binding OpenClickCommand}" Header="Open" />
-                    <MenuItem Command="{Binding SettingsClickCommand}" Header="Settings" />
+                    <MenuItem
+                        Command="{Binding SettingsClickCommand}"
+                        Header="Settings"
+                        IsEnabled="False" />
                     <MenuItem Command="{Binding ExitClickCommand}" Header="Exit" />
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>

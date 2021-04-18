@@ -15,7 +15,7 @@ namespace ABI.ViewModel.ViewModels
             AirpodsInfo = new AirpodsInfoModel();
 
             OpenClickCommand = new RelayCommand<object>(e => OpenClick(), p => true);
-            SettingsClickCommand = new RelayCommand<object>(e => SettingsClick(), p => true);
+            SettingsClickCommand = new RelayCommand<object>(e => { }, p => true);
             ExitClickCommand = new RelayCommand<object>(e => ExitClick(), p => true);
             TrayIconClickCommand = new RelayCommand<WindowState>(e => ToggleNormalizeMinimize(e), p => true);
             TrayIconDoubleClickCommand = new RelayCommand<WindowState>(e => ToggleNormalizeMinimize(e), p => true);
@@ -62,11 +62,6 @@ namespace ABI.ViewModel.ViewModels
         public void OpenClick()
         {
             NormalizeAction();
-        }
-
-        public void SettingsClick()
-        {
-
         }
 
         public void ExitClick()
