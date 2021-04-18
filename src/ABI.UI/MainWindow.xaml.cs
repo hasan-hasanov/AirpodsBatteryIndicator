@@ -30,7 +30,7 @@ namespace ABI.UI
                 IsEnabled = true
             };
 
-            dispatcherTimer.Tick += (s, e) => { };
+            dispatcherTimer.Tick += (s, e) => mainViewModel.StartBackgroundJob();
             dispatcherTimer.Start();
 
             mainViewModel.ExitAction = () => Close();

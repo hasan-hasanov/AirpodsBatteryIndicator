@@ -1,7 +1,10 @@
 ﻿using ABI.Common.Enums;
 using ABI.Model.Models;
 using ABI.ViewModel.Commands;
+using ABI.ViewModel.Jobs;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ABI.ViewModel.ViewModels
@@ -9,10 +12,12 @@ namespace ABI.ViewModel.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private AirpodsInfoModel airpodsInfoModel;
+        private BleScannerJob bleScannerJob;
 
         public MainViewModel()
         {
             AirpodsInfo = new AirpodsInfoModel();
+            bleScannerJob = new BleScannerJob();
 
             OpenClickCommand = new RelayCommand<object>(e => OpenClick(), p => true);
             SettingsClickCommand = new RelayCommand<object>(e => { }, p => true);
@@ -67,6 +72,11 @@ namespace ABI.ViewModel.ViewModels
         public void ExitClick()
         {
             ExitAction();
+        }
+
+        public void StartBackgroundJob()
+        {
+            bleScannerJob.ExecuteAsync(CancellationToken.None);
         }
     }
 }
