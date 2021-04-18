@@ -4,7 +4,6 @@ using ABI.ViewModel.Commands;
 using ABI.ViewModel.Jobs;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ABI.ViewModel.ViewModels
@@ -13,11 +12,14 @@ namespace ABI.ViewModel.ViewModels
     {
         private AirpodsInfoModel airpodsInfoModel;
         private BleScannerJob bleScannerJob;
+        private event Action<char[]> onBleStatusChanged;
 
         public MainViewModel()
         {
+            onBleStatusChanged = new Action<char[]>(OnBleStatusChanged);
+
             AirpodsInfo = new AirpodsInfoModel();
-            bleScannerJob = new BleScannerJob();
+            bleScannerJob = new BleScannerJob(onBleStatusChanged);
 
             OpenClickCommand = new RelayCommand<object>(e => OpenClick(), p => true);
             SettingsClickCommand = new RelayCommand<object>(e => { }, p => true);
@@ -77,6 +79,10 @@ namespace ABI.ViewModel.ViewModels
         public void StartBackgroundJob()
         {
             bleScannerJob.ExecuteAsync(CancellationToken.None);
+        }
+
+        private void OnBleStatusChanged(char[] obj)
+        {
         }
     }
 }

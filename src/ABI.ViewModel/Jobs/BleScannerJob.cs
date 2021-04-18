@@ -11,9 +11,16 @@ namespace ABI.ViewModel.Jobs
 {
     public class BleScannerJob
     {
+        private readonly Action<char[]> _onBleStatusChanged;
+
         private Task executingTask;
         private BluetoothLEAdvertisementWatcher watcher;
         private TaskCompletionSource<bool> taskCompletionSource;
+
+        public BleScannerJob(Action<char[]> onBleFound)
+        {
+            _onBleStatusChanged = onBleFound;
+        }
 
         public Task ExecuteAsync(CancellationToken cancellationToken)
         {
@@ -35,7 +42,7 @@ namespace ABI.ViewModel.Jobs
                     watcher.Stop();
                     if (!taskCompletionSource.Task.IsCompleted)
                     {
-                        taskCompletionSource.SetResult(false);
+                        taskCompletionSource.SetCanceled();
                     }
                 });
 
@@ -53,7 +60,7 @@ namespace ABI.ViewModel.Jobs
                 }
                 catch
                 {
-                    // TODO: Raise an event here to send the hex!
+                    _onBleStatusChanged(new char[] { });
                 }
                 finally
                 {
@@ -86,8 +93,7 @@ namespace ABI.ViewModel.Jobs
             reader.ReadBytes(rawData);
 
             char[] airpodsInfoHex = BitConverter.ToString(rawData).Split("-").SelectMany(s => s).ToArray();
-
-            // TODO: Raise an event here to send the hex!
+            _onBleStatusChanged.Invoke(airpodsInfoHex);
 
             if (!taskCompletionSource.Task.IsCompleted)
             {
