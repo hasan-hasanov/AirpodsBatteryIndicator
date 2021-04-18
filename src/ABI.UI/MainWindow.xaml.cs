@@ -3,11 +3,13 @@ using ABI.ViewModel.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace ABI.UI
 {
     public partial class MainWindow : Window, IMainScreen
     {
+        private int i = 0;
         public MainWindow(MainViewModel mainViewModel)
         {
             InitializeComponent();
@@ -22,7 +24,16 @@ namespace ABI.UI
 
         private void InitializeMvvm(MainViewModel mainViewModel)
         {
-            mainViewModel.ExitAction = new Action(Close);
+            DispatcherTimer dispatcherTimer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(1),
+                IsEnabled = true
+            };
+
+            dispatcherTimer.Tick += (s, e) => { };
+            dispatcherTimer.Start();
+
+            mainViewModel.ExitAction = () => Close();
             mainViewModel.MinimizeAction = () => WindowState = WindowState.Minimized;
             mainViewModel.NormalizeAction = () => WindowState = WindowState.Normal;
         }
