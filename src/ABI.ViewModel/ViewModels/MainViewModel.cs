@@ -92,6 +92,7 @@ namespace ABI.ViewModel.ViewModels
             if (obj.Length > 0)
             {
                 AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
+
                 AirpodsInfo.CaseBattery = airpodsInfo.CaseStatus.ToString();
                 AirpodsInfo.LeftEarbudBattery = airpodsInfo.LeftEarbudStatus.ToString();
                 AirpodsInfo.RightEarbudBattery = airpodsInfo.RightEarbudStatus.ToString();

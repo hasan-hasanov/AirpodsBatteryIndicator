@@ -35,7 +35,7 @@ namespace ABI.ViewModel.Jobs
         private async Task ScanForBleDevices()
         {
             taskCompletionSource = new TaskCompletionSource<bool>();
-            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(5)))
+            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(3)))
             {
                 cts.Token.Register(() =>
                 {
@@ -99,6 +99,8 @@ namespace ABI.ViewModel.Jobs
             {
                 taskCompletionSource.SetResult(true);
             }
+
+            watcher.Stop();
         }
     }
 }
