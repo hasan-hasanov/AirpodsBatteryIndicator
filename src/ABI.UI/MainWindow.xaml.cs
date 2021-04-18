@@ -1,5 +1,4 @@
-﻿using ABI.ViewModel.Screens;
-using ABI.ViewModel.ViewModels;
+﻿using ABI.ViewModel.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Forms;
@@ -7,9 +6,8 @@ using System.Windows.Threading;
 
 namespace ABI.UI
 {
-    public partial class MainWindow : Window, IMainScreen
+    public partial class MainWindow : Window
     {
-        private int i = 0;
         public MainWindow(MainViewModel mainViewModel)
         {
             InitializeComponent();

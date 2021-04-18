@@ -1,5 +1,4 @@
-﻿using ABI.ViewModel.Screens;
-using ABI.ViewModel.ViewModels;
+﻿using ABI.ViewModel.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
@@ -12,9 +11,9 @@ namespace ABI.UI
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<MainViewModel>();
-            services.AddSingleton<IMainScreen, MainWindow>();
+            services.AddSingleton<MainWindow>();
 
-            services.BuildServiceProvider().GetService<IMainScreen>().Show();
+            services.BuildServiceProvider().GetService<MainWindow>().Show();
         }
     }
 }
