@@ -76,9 +76,10 @@
             Name="tbIcon"
             Grid.Row="2"
             DoubleClickCommand="{Binding TrayIconClickCommand}"
-            DoubleClickCommandParameter="{Binding ElementName=MainScreen, Path=WindowState, Mode=TwoWay, UpdateSourceTrigger=Explicit, Converter={StaticResource WindowStateToEnum}}"
+            DoubleClickCommandParameter="{Binding ElementName=MainScreen, Path=WindowState, Mode=TwoWay, Converter={StaticResource WindowStateToEnum}}"
             LeftClickCommand="{Binding TrayIconClickCommand}"
-            LeftClickCommandParameter="{Binding ElementName=MainScreen, Path=WindowState, Mode=TwoWay, UpdateSourceTrigger=Explicit, Converter={StaticResource WindowStateToEnum}}"
+            LeftClickCommandParameter="{Binding ElementName=MainScreen, Path=WindowState, Mode=TwoWay, Converter={StaticResource WindowStateToEnum}}"
+            NoLeftClickDelay="True"
             Style="{StaticResource DefaultTrayIconStyle}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
