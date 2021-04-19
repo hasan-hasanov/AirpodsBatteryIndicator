@@ -31,9 +31,9 @@ namespace ABI.UI
             dispatcherTimer.Tick += (s, e) => mainViewModel.StartBackgroundJob();
             dispatcherTimer.Start();
 
-            mainViewModel.ExitAction = () => Close();
-            mainViewModel.MinimizeAction = () => WindowState = WindowState.Minimized;
-            mainViewModel.NormalizeAction = () => WindowState = WindowState.Normal;
+            mainViewModel.ExitAction = () => Dispatcher.Invoke(() => Close());
+            mainViewModel.MinimizeAction = () => Dispatcher.Invoke(() => WindowState = WindowState.Minimized);
+            mainViewModel.NormalizeAction = () => Dispatcher.Invoke(() => WindowState = WindowState.Normal);
         }
     }
 }
