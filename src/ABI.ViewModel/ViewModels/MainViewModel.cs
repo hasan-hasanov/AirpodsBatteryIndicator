@@ -42,6 +42,13 @@ namespace ABI.ViewModel.ViewModels
         public Action MinimizeAction { get; set; }
         public Action NormalizeAction { get; set; }
 
+        public Action TrayIconDefault { get; set; }
+        public Action TrayIcon100Percent { get; set; }
+        public Action TrayIcon75Percent { get; set; }
+        public Action TrayIcon50Percent { get; set; }
+        public Action TrayIcon30Percent { get; set; }
+        public Action TrayIcon15Percent { get; set; }
+
         private AirpodsInfoModel airpodsInfoModel;
         public AirpodsInfoModel AirpodsInfo
         {

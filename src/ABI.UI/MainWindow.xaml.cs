@@ -34,6 +34,13 @@ namespace ABI.UI
             mainViewModel.ExitAction = () => Dispatcher.Invoke(() => Close());
             mainViewModel.MinimizeAction = () => Dispatcher.Invoke(() => WindowState = WindowState.Minimized);
             mainViewModel.NormalizeAction = () => Dispatcher.Invoke(() => WindowState = WindowState.Normal);
+
+            mainViewModel.TrayIconDefault = () => Dispatcher.Invoke(() => tbIcon.Style = (Style)FindResource("DefaultTrayIconStyle"));
+            mainViewModel.TrayIcon100Percent = () => Dispatcher.Invoke(() => tbIcon.Style = (Style)FindResource("100PercentTrayIconStyle"));
+            mainViewModel.TrayIcon75Percent = () => Dispatcher.Invoke(() => tbIcon.Style = (Style)FindResource("75PercentTrayIconStyle"));
+            mainViewModel.TrayIcon50Percent = () => Dispatcher.Invoke(() => tbIcon.Style = (Style)FindResource("50PercentTrayIconStyle"));
+            mainViewModel.TrayIcon30Percent = () => Dispatcher.Invoke(() => tbIcon.Style = (Style)FindResource("30PercentTrayIconStyle"));
+            mainViewModel.TrayIcon15Percent = () => Dispatcher.Invoke(() => tbIcon.Style = (Style)FindResource("15PercentTrayIconStyle"));
         }
     }
 }
