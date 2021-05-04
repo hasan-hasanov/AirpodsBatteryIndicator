@@ -1,4 +1,6 @@
-﻿namespace ABI.Model.Models
+﻿using ABI.Model.Entities;
+
+namespace ABI.Model.Models
 {
     public class AirpodsInfoModel : BaseModel
     {
@@ -11,6 +13,13 @@
             LeftEarbudBattery = "-1";
             RightEarbudBattery = "-1";
             CaseBattery = "-1";
+        }
+
+        public AirpodsInfoModel(AirpodsInfo airpodsInfo)
+        {
+            CaseBattery = airpodsInfo.CaseStatus.ToString();
+            LeftEarbudBattery = airpodsInfo.LeftEarbudStatus.ToString();
+            RightEarbudBattery = airpodsInfo.RightEarbudStatus.ToString();
         }
 
         public bool IsAvailable => leftEarbudBattery != "-1" || rightEarbudBattery != "-1" || caseBattery != "-1";

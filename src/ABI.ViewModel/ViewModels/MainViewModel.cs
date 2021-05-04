@@ -1,5 +1,4 @@
 ﻿using ABI.Common.Enums;
-using ABI.Model.Entities;
 using ABI.Model.Models;
 using ABI.ViewModel.AirpodsBle;
 using ABI.ViewModel.Commands;
@@ -89,18 +88,7 @@ namespace ABI.ViewModel.ViewModels
 
         private void OnBleStatusChanged(char[] obj)
         {
-            if (obj.Length > 0)
-            {
-                AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
-
-                AirpodsInfo.CaseBattery = airpodsInfo.CaseStatus.ToString();
-                AirpodsInfo.LeftEarbudBattery = airpodsInfo.LeftEarbudStatus.ToString();
-                AirpodsInfo.RightEarbudBattery = airpodsInfo.RightEarbudStatus.ToString();
-            }
-            else
-            {
-                AirpodsInfo = new AirpodsInfoModel();
-            }
+            AirpodsInfo = obj.Length > 0 ? new AirpodsInfoModel(_airpodsBleParser.Parse(obj)) : new AirpodsInfoModel();
         }
     }
 }
