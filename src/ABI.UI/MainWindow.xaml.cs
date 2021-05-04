@@ -15,7 +15,6 @@ namespace ABI.UI
 
             this.DataContext = mainViewModel;
 
-            // Position the window to the bottom right of the screen
             Left = Screen.PrimaryScreen.WorkingArea.Right - this.Width;
             Top = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height;
         }

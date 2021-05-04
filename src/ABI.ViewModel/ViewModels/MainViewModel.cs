@@ -1,4 +1,5 @@
 ﻿using ABI.Common.Enums;
+using ABI.Model.Entities;
 using ABI.Model.Models;
 using ABI.ViewModel.AirpodsBle;
 using ABI.ViewModel.Commands;
@@ -95,7 +96,52 @@ namespace ABI.ViewModel.ViewModels
 
         private void OnBleStatusChanged(char[] obj)
         {
-            AirpodsInfo = obj.Length > 0 ? new AirpodsInfoModel(_airpodsBleParser.Parse(obj)) : new AirpodsInfoModel();
+            if (obj.Length > 0)
+            {
+                AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
+                AirpodsInfo = new AirpodsInfoModel(airpodsInfo);
+
+                int minPercentage = airpodsInfo.CaseStatus;
+                if (airpodsInfo.LeftEarbudStatus > 0)
+                {
+                    minPercentage = airpodsInfo.LeftEarbudStatus;
+                }
+                if (airpodsInfo.RightEarbudStatus > 0)
+                {
+                    minPercentage = airpodsInfo.RightEarbudStatus;
+                }
+
+                if (airpodsInfo.RightEarbudStatus > 0 && airpodsInfo.RightEarbudStatus < airpodsInfo.LeftEarbudStatus)
+                {
+                    minPercentage = airpodsInfo.RightEarbudStatus;
+                }
+
+                if (minPercentage > 75)
+                {
+                    TrayIcon100Percent.Invoke();
+                }
+                else if (minPercentage > 50)
+                {
+                    TrayIcon75Percent.Invoke();
+                }
+                else if (minPercentage > 30)
+                {
+                    TrayIcon50Percent.Invoke();
+                }
+                else if (minPercentage > 15)
+                {
+                    TrayIcon30Percent.Invoke();
+                }
+                else
+                {
+                    TrayIcon15Percent.Invoke();
+                }
+            }
+            else
+            {
+                AirpodsInfo = new AirpodsInfoModel();
+                TrayIconDefault.Invoke();
+            }
         }
     }
 }
