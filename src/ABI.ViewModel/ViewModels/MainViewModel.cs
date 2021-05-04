@@ -101,20 +101,7 @@ namespace ABI.ViewModel.ViewModels
                 AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
                 AirpodsInfo = new AirpodsInfoModel(airpodsInfo);
 
-                int minPercentage = airpodsInfo.CaseStatus;
-                if (airpodsInfo.LeftEarbudStatus > 0)
-                {
-                    minPercentage = airpodsInfo.LeftEarbudStatus;
-                }
-                if (airpodsInfo.RightEarbudStatus > 0)
-                {
-                    minPercentage = airpodsInfo.RightEarbudStatus;
-                }
-
-                if (airpodsInfo.RightEarbudStatus > 0 && airpodsInfo.RightEarbudStatus < airpodsInfo.LeftEarbudStatus)
-                {
-                    minPercentage = airpodsInfo.RightEarbudStatus;
-                }
+                int minPercentage = AirpodsInfo.MinBatteryPercent.Value;
 
                 if (minPercentage > 75)
                 {
