@@ -1,4 +1,5 @@
-﻿using ABI.Model.Entities;
+﻿using ABI.Common.Enums;
+using ABI.Model.Entities;
 using System;
 
 namespace ABI.Model.Models
@@ -57,6 +58,41 @@ namespace ABI.Model.Models
                 return null;
             }
         }
+
+        public BatteryPercentStatus BatteryStatus
+        {
+            get
+            {
+                BatteryPercentStatus batteryPercentStatus = BatteryPercentStatus.BatteryUndetermined;
+
+                if (MinBatteryPercent.HasValue)
+                {
+                    if (MinBatteryPercent > 75)
+                    {
+                        batteryPercentStatus = BatteryPercentStatus.Battery100Percent;
+                    }
+                    else if (MinBatteryPercent > 50)
+                    {
+                        batteryPercentStatus = BatteryPercentStatus.Battery75Percent;
+                    }
+                    else if (MinBatteryPercent > 30)
+                    {
+                        batteryPercentStatus = BatteryPercentStatus.Battery50Percent;
+                    }
+                    else if (MinBatteryPercent > 15)
+                    {
+                        batteryPercentStatus = BatteryPercentStatus.Battery30Percent;
+                    }
+                    else
+                    {
+                        batteryPercentStatus = BatteryPercentStatus.Battery15Percent;
+                    }
+                }
+
+                return batteryPercentStatus;
+            }
+        }
+
 
         public string LeftEarbudBattery
         {

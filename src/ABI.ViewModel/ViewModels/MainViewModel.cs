@@ -5,6 +5,7 @@ using ABI.ViewModel.AirpodsBle;
 using ABI.ViewModel.Commands;
 using ABI.ViewModel.Jobs;
 using System;
+using System.Collections.Concurrent;
 using System.Threading;
 using System.Windows.Input;
 
@@ -13,6 +14,7 @@ namespace ABI.ViewModel.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private readonly AirpodsBleParser _airpodsBleParser;
+        private readonly ConcurrentDictionary<BatteryPercentStatus, Action> _changeTrayIcon;
 
         private event Action<char[]> onBleStatusChanged;
         private BleScannerJob bleScannerJob;
@@ -20,6 +22,13 @@ namespace ABI.ViewModel.ViewModels
         public MainViewModel(AirpodsBleParser airpodsBleParser)
         {
             _airpodsBleParser = airpodsBleParser;
+            _changeTrayIcon = new ConcurrentDictionary<BatteryPercentStatus, Action>();
+            _changeTrayIcon.TryAdd(BatteryPercentStatus.BatteryUndetermined, () => TrayIconDefault.Invoke());
+            _changeTrayIcon.TryAdd(BatteryPercentStatus.Battery100Percent, () => TrayIcon100Percent());
+            _changeTrayIcon.TryAdd(BatteryPercentStatus.Battery75Percent, () => TrayIcon75Percent());
+            _changeTrayIcon.TryAdd(BatteryPercentStatus.Battery50Percent, () => TrayIcon50Percent());
+            _changeTrayIcon.TryAdd(BatteryPercentStatus.Battery30Percent, () => TrayIcon30Percent());
+            _changeTrayIcon.TryAdd(BatteryPercentStatus.Battery15Percent, () => TrayIcon15Percent());
 
             onBleStatusChanged = new Action<char[]>(OnBleStatusChanged);
             bleScannerJob = new BleScannerJob(onBleStatusChanged);
@@ -100,29 +109,7 @@ namespace ABI.ViewModel.ViewModels
             {
                 AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
                 AirpodsInfo = new AirpodsInfoModel(airpodsInfo);
-
-                int minPercentage = AirpodsInfo.MinBatteryPercent.Value;
-
-                if (minPercentage > 75)
-                {
-                    TrayIcon100Percent.Invoke();
-                }
-                else if (minPercentage > 50)
-                {
-                    TrayIcon75Percent.Invoke();
-                }
-                else if (minPercentage > 30)
-                {
-                    TrayIcon50Percent.Invoke();
-                }
-                else if (minPercentage > 15)
-                {
-                    TrayIcon30Percent.Invoke();
-                }
-                else
-                {
-                    TrayIcon15Percent.Invoke();
-                }
+                _changeTrayIcon[AirpodsInfo.BatteryStatus].Invoke();
             }
             else
             {
