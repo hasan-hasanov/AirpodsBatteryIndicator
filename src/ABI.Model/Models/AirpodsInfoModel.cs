@@ -49,7 +49,7 @@ namespace ABI.Model.Models
 
                     if (airpods.CaseStatus > 0 && airpods.CaseStatus < minPercentage)
                     {
-                        minPercentage = airpods.RightEarbudStatus;
+                        minPercentage = airpods.CaseStatus;
                     }
 
                     return minPercentage;
