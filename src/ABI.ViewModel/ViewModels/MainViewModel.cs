@@ -15,9 +15,7 @@ namespace ABI.ViewModel.ViewModels
     {
         private readonly AirpodsBleParser _airpodsBleParser;
         private readonly ConcurrentDictionary<BatteryPercentStatus, Action> _changeTrayIcon;
-
-        private event Action<char[]> onBleStatusChanged;
-        private BleScannerJob bleScannerJob;
+        private readonly BleScannerJob _bleScannerJob;
 
         public MainViewModel(AirpodsBleParser airpodsBleParser)
         {
@@ -30,8 +28,7 @@ namespace ABI.ViewModel.ViewModels
             _changeTrayIcon.TryAdd(BatteryPercentStatus.Battery30Percent, () => TrayIcon30Percent());
             _changeTrayIcon.TryAdd(BatteryPercentStatus.Battery15Percent, () => TrayIcon15Percent());
 
-            onBleStatusChanged = new Action<char[]>(OnBleStatusChanged);
-            bleScannerJob = new BleScannerJob(onBleStatusChanged);
+            _bleScannerJob = new BleScannerJob(new Action<char[]>(OnBleStatusChanged));
 
             OpenClickCommand = new RelayCommand<object>(e => OpenClick(), p => true);
             SettingsClickCommand = new RelayCommand<object>(e => { }, p => true);
@@ -100,7 +97,7 @@ namespace ABI.ViewModel.ViewModels
 
         public void StartBackgroundJob()
         {
-            bleScannerJob.ExecuteAsync(CancellationToken.None);
+            _bleScannerJob.ExecuteAsync(CancellationToken.None);
         }
 
         private void OnBleStatusChanged(char[] obj)
