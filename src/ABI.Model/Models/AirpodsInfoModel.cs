@@ -132,5 +132,7 @@ namespace ABI.Model.Models
                 }
             }
         }
+
+        public bool IsCaseOpen => airpods.CaseStatus != -1;
     }
 }

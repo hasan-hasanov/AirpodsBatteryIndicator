@@ -115,13 +115,13 @@ namespace ABI.ViewModel.ViewModels
                 AirpodsInfo = new AirpodsInfoModel(airpodsInfo);
                 _changeTrayIcon[AirpodsInfo.BatteryStatus].Invoke();
 
-                if (isFirstTime && airpodsInfo.CaseStatus != -1)
+                if (isFirstTime && AirpodsInfo.IsCaseOpen)
                 {
                     isFirstTime = false;
                     NormalizeAction();
                 }
 
-                if (airpodsInfo.CaseStatus == -1)
+                if (!AirpodsInfo.IsCaseOpen)
                 {
                     isFirstTime = true;
                 }
