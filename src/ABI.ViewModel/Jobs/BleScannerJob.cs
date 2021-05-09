@@ -26,16 +26,18 @@ namespace ABI.ViewModel.Jobs
         {
             if (executingTask == null || executingTask.IsCompleted)
             {
-                executingTask = ScanForBleDevices();
+                executingTask = ScanForBleDevices(cancellationToken);
             }
 
             return Task.CompletedTask;
         }
 
-        private async Task ScanForBleDevices()
+        private async Task ScanForBleDevices(CancellationToken cancellationToken)
         {
             taskCompletionSource = new TaskCompletionSource<bool>();
-            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(AppleConstants.SecondsToWaitBeforeDeclaringUnconnected)))
+
+            using (CancellationTokenSource localCts = new CancellationTokenSource(TimeSpan.FromSeconds(AppleConstants.SecondsToWaitBeforeDeclaringUnconnected)))
+            using (CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, localCts.Token))
             {
                 cts.Token.Register(() =>
                 {
