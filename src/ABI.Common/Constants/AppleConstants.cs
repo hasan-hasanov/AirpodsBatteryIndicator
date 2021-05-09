@@ -12,5 +12,7 @@
         public const int RightEarbudNotFlippedPosition = 12;
 
         public const int CasePosition = 15;
+
+        public const int SecondsToWaitBeforeDeclaringUnconnected = 2;
     }
 }

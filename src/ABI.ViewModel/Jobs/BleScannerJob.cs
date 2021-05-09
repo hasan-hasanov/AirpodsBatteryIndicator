@@ -35,7 +35,7 @@ namespace ABI.ViewModel.Jobs
         private async Task ScanForBleDevices()
         {
             taskCompletionSource = new TaskCompletionSource<bool>();
-            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(3)))
+            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(AppleConstants.SecondsToWaitBeforeDeclaringUnconnected)))
             {
                 cts.Token.Register(() =>
                 {
