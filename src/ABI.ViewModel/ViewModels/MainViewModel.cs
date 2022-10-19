@@ -17,8 +17,6 @@ namespace ABI.ViewModel.ViewModels
         private readonly ConcurrentDictionary<BatteryPercentStatus, Action> _changeTrayIcon;
         private readonly BleScannerJob _bleScannerJob;
 
-        private bool isFirstTime = true;
-
         public MainViewModel(AirpodsBleParser airpodsBleParser)
         {
             _airpodsBleParser = airpodsBleParser;
@@ -114,21 +112,9 @@ namespace ABI.ViewModel.ViewModels
                 AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
                 AirpodsInfo = new AirpodsInfoModel(airpodsInfo);
                 _changeTrayIcon[AirpodsInfo.BatteryStatus].Invoke();
-
-                if (isFirstTime && AirpodsInfo.IsCaseOpen)
-                {
-                    isFirstTime = false;
-                    NormalizeAction();
-                }
-
-                if (!AirpodsInfo.IsCaseOpen)
-                {
-                    isFirstTime = true;
-                }
             }
             else
             {
-                isFirstTime = true;
                 AirpodsInfo = new AirpodsInfoModel();
                 TrayIconDefault.Invoke();
             }

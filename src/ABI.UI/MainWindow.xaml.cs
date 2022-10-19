@@ -31,8 +31,8 @@ namespace ABI.UI
             dispatcherTimer.Start();
 
             mainViewModel.ExitAction = () => Dispatcher.Invoke(() => Close());
-            mainViewModel.MinimizeAction = () => Dispatcher.Invoke(() => WindowState = WindowState.Minimized);
-            mainViewModel.NormalizeAction = () => Dispatcher.Invoke(() => WindowState = WindowState.Normal);
+            mainViewModel.MinimizeAction = () => Dispatcher.Invoke(() => { Hide(); WindowState = WindowState.Minimized; });
+            mainViewModel.NormalizeAction = () => Dispatcher.Invoke(() => { Show(); WindowState = WindowState.Normal; });
 
             mainViewModel.TrayIconDefault = () => Dispatcher.Invoke(() => tbIcon.Style = (Style)FindResource("DefaultTrayIconStyle"));
             mainViewModel.TrayIcon100Percent = () => Dispatcher.Invoke(() => tbIcon.Style = (Style)FindResource("100PercentTrayIconStyle"));
