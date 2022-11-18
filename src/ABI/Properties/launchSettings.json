@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ABI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ABI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

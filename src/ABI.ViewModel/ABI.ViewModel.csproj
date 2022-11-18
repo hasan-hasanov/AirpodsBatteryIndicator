@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ABI.Common\ABI.Common.csproj" />
-    <ProjectReference Include="..\ABI.Model\ABI.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="System.Runtime.WindowsRuntime">
       <HintPath>..\ExternalLibs\System.Runtime.WindowsRuntime.dll</HintPath>
     </Reference>
