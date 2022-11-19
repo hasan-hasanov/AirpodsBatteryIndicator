@@ -1,25 +1,85 @@
-﻿namespace ABI.ViewModel.ViewModels
+﻿using ABI.Common;
+using ABI.Model.Entities;
+using ABI.ViewModel.BleParsers;
+using ABI.ViewModel.Jobs;
+using System;
+using System.Threading;
+
+namespace ABI.ViewModel.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public MainViewModel()
-        {
-            Test = "AAAAAAAAAAAAAA";
-        }
+        private readonly AirpodsBleParser _airpodsBleParser;
+        private readonly BleScannerJob _bleScannerJob;
 
-        private string test;
-        public string Test
+        private string leftEarbudsBatteryLevel;
+        public string LeftEarbudsBatteryLevel
         {
             get
             {
-                return test;
+                return leftEarbudsBatteryLevel;
             }
             set
             {
-                test = value;
-                RaisePropertyChanged(nameof(Test));
+                leftEarbudsBatteryLevel = value;
+                RaisePropertyChanged(nameof(LeftEarbudsBatteryLevel));
             }
         }
 
+        private string rightEarbudsBatteryLevel;
+        public string RightEarbudsBatterylevel
+        {
+            get
+            {
+                return rightEarbudsBatteryLevel;
+            }
+            set
+            {
+                rightEarbudsBatteryLevel = value;
+                RaisePropertyChanged(nameof(RightEarbudsBatterylevel));
+            }
+        }
+
+        private string caseBatteryLevel;
+        public string CaseBatterylevel
+        {
+            get
+            {
+                return caseBatteryLevel;
+            }
+            set
+            {
+                caseBatteryLevel = value;
+                RaisePropertyChanged(nameof(CaseBatterylevel));
+            }
+        }
+
+        public MainViewModel(AirpodsBleParser airpodsBleParser)
+        {
+            _airpodsBleParser = airpodsBleParser;
+            _bleScannerJob = new BleScannerJob(new Action<char[]>(OnBleStatusChanged));
+        }
+
+        public void StartBackgroundJob()
+        {
+            _bleScannerJob.ExecuteAsync(CancellationToken.None);
+        }
+
+        private void OnBleStatusChanged(char[] obj)
+        {
+            if (obj.Length > 0)
+            {
+                AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
+                LeftEarbudsBatteryLevel = airpodsInfo.LeftEarbudStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.LeftEarbudStatus.ToString();
+                RightEarbudsBatterylevel = airpodsInfo.RightEarbudStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.RightEarbudStatus.ToString();
+                CaseBatterylevel = airpodsInfo.CaseStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.CaseStatus.ToString();
+            }
+            else
+            {
+                LeftEarbudsBatteryLevel = AppleConstants.NotAvailable;
+                RightEarbudsBatterylevel = AppleConstants.NotAvailable;
+                CaseBatterylevel = AppleConstants.NotAvailable;
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+using ABI.ViewModel.BleParsers;
 using ABI.ViewModel.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
@@ -14,6 +15,12 @@ namespace UI
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
             IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<AreEarbudsFlippedParser>();
+            services.AddSingleton<CaseParser>();
+            services.AddSingleton<LeftEarbudParser>();
+            services.AddSingleton<RightEarbudParser>();
+            services.AddSingleton<AirpodsBleParser>();
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainViewModel>();

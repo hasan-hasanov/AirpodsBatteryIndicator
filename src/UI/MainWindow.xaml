@@ -13,9 +13,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Image
@@ -41,21 +41,22 @@
             Grid.Column="0"
             Margin="8,0,0,0"
             HorizontalAlignment="Left"
-            Text="{x:Bind MainViewModel.Test, Mode=OneWay}"/>
+            Style="{StaticResource BatteryIndicatorTextBlockStyle}"
+            Text="{x:Bind MainViewModel.LeftEarbudsBatteryLevel, Mode=OneWay}"/>
 
-        <!--<TextBlock
+        <TextBlock
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Center"
-            Text="{Binding Path=AirpodsInfo.CaseBattery, Mode=OneWay}"
-            Style="{StaticResource LightBatteryIndicatorLabelsStyle}" />
+            Style="{StaticResource BatteryIndicatorTextBlockStyle}"
+            Text="{x:Bind MainViewModel.CaseBatterylevel, Mode=OneWay}" />
 
         <TextBlock
             Grid.Row="1"
             Grid.Column="2"
             Margin="0,0,8,0"
             HorizontalAlignment="Right"
-            Text="{Binding Path=AirpodsInfo.RightEarbudBattery, Mode=OneWay}"
-            Style="{StaticResource LightBatteryIndicatorLabelsStyle}" />-->
+            Style="{StaticResource BatteryIndicatorTextBlockStyle}"
+            Text="{x:Bind MainViewModel.RightEarbudsBatterylevel, Mode=OneWay}" />
     </Grid>
 </Window>

@@ -14,5 +14,7 @@
         public const int CasePosition = 15;
 
         public const int SecondsToWaitBeforeDeclaringUnconnected = 2;
+
+        public const string NotAvailable = "N/A";
     }
 }
