@@ -11,6 +11,15 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Assets\Images\contrast-standard\theme-dark\Case.png" />
+    <None Remove="Assets\Images\contrast-standard\theme-dark\Left.png" />
+    <None Remove="Assets\Images\contrast-standard\theme-dark\Right.png" />
+    <None Remove="Assets\Images\contrast-standard\theme-light\Case.png" />
+    <None Remove="Assets\Images\contrast-standard\theme-light\Left.png" />
+    <None Remove="Assets\Images\contrast-standard\theme-light\Right.png" />
+    <None Remove="Styles\ControlStyles.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -34,7 +43,12 @@
     package has not yet been restored.
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
-    <ProjectCapability Include="Msix"/>
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Styles\ControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!-- 

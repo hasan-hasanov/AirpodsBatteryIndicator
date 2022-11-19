@@ -1,0 +1,30 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  ================================================== Image Styles ==================================================  -->
+    <Style x:Key="LightLeftEarbudStyle" TargetType="Image">
+        <Setter Property="Source" Value="ms-appx:///Assets/Images/Left.png" />
+    </Style>
+
+    <Style x:Key="LightCaseStyle" TargetType="Image">
+        <Setter Property="Source" Value="ms-appx:///Assets/Images/Case.png" />
+    </Style>
+
+    <Style x:Key="LightRightEarbudStyle" TargetType="Image">
+        <Setter Property="Source" Value="ms-appx:///Assets/Images/Right.png" />
+    </Style>
+
+    <Style x:Key="DarkLeftEarbudStyle" TargetType="Image">
+        <Setter Property="Source" Value="ms-appx:///Assets/Images/Left.png" />
+    </Style>
+
+    <Style x:Key="DarkCaseStyle" TargetType="Image">
+        <Setter Property="Source" Value="ms-appx:///Assets/Images/Case.png" />
+    </Style>
+
+    <Style x:Key="DarkRightEarbudStyle" TargetType="Image">
+        <Setter Property="Source" Value="ms-appx:///Assets/Images/Right.png" />
+    </Style>
+    
+</ResourceDictionary>
