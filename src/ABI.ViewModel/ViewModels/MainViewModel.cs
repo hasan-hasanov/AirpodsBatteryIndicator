@@ -12,6 +12,8 @@ namespace ABI.ViewModel.ViewModels
         private readonly AirpodsBleParser _airpodsBleParser;
         private readonly BleScannerJob _bleScannerJob;
 
+        public Action<Action> RunOnUIThread { get; set; }
+
         private string leftEarbudsBatteryLevel;
         public string LeftEarbudsBatteryLevel
         {
@@ -70,9 +72,9 @@ namespace ABI.ViewModel.ViewModels
             if (obj.Length > 0)
             {
                 AirpodsInfo airpodsInfo = _airpodsBleParser.Parse(obj);
-                LeftEarbudsBatteryLevel = airpodsInfo.LeftEarbudStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.LeftEarbudStatus.ToString();
-                RightEarbudsBatterylevel = airpodsInfo.RightEarbudStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.RightEarbudStatus.ToString();
-                CaseBatterylevel = airpodsInfo.CaseStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.CaseStatus.ToString();
+                RunOnUIThread(() => LeftEarbudsBatteryLevel = airpodsInfo.LeftEarbudStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.LeftEarbudStatus.ToString());
+                RunOnUIThread(() => RightEarbudsBatterylevel = airpodsInfo.RightEarbudStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.RightEarbudStatus.ToString());
+                RunOnUIThread(() => CaseBatterylevel = airpodsInfo.CaseStatus == -1 ? AppleConstants.NotAvailable : airpodsInfo.CaseStatus.ToString());
             }
             else
             {

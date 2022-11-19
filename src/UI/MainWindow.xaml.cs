@@ -19,8 +19,10 @@ namespace UI
 
             MainViewModel = viewModel;
 
-            dispatcherTimer.Tick += (s, e) => MainViewModel.StartBackgroundJob();
+            dispatcherTimer.Tick += (s, e) => DispatcherQueue.TryEnqueue(() => MainViewModel.StartBackgroundJob());
             dispatcherTimer.Start();
+
+            MainViewModel.RunOnUIThread = action => DispatcherQueue.TryEnqueue(() => action?.Invoke());
         }
 
         public MainViewModel MainViewModel { get; }
