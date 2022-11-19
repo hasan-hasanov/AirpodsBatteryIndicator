@@ -1,4 +1,4 @@
-﻿namespace ABI.Common.Constants
+﻿namespace ABI.Common
 {
     public class AppleConstants
     {

@@ -46,6 +46,9 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ABI.ViewModel\ABI.ViewModel.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Styles\ControlStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
