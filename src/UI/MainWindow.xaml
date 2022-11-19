@@ -36,15 +36,14 @@
             Margin="2,4,8,2"
             Style="{StaticResource LightRightEarbudStyle}" />
 
-        <!--<TextBlock
+        <TextBlock
             Grid.Row="1"
             Grid.Column="0"
             Margin="8,0,0,0"
             HorizontalAlignment="Left"
-            Text="{Binding Path=AirpodsInfo.LeftEarbudBattery, Mode=OneWay}"
-            Style="{StaticResource LightBatteryIndicatorLabelsStyle}" />
+            Text="{x:Bind MainViewModel.Test, Mode=OneWay}"/>
 
-        <TextBlock
+        <!--<TextBlock
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Center"

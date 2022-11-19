@@ -1,3 +1,5 @@
+using ABI.ViewModel.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 
 namespace UI
@@ -11,7 +13,12 @@ namespace UI
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            m_window = new MainWindow();
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<MainWindow>();
+            services.AddSingleton<MainViewModel>();
+
+            m_window = services.BuildServiceProvider().GetService<MainWindow>();
             m_window.Activate();
         }
 
